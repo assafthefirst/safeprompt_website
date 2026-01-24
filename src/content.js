@@ -4,30 +4,6 @@ import { findPromptElement as siteFindPromptElement, getPromptText as siteGetPro
 
 console.log("SafePrompt Enterprise Logic Loaded 🛡️");
 
-// #region agent log
-const __SP_DEBUG_ENDPOINT__ =
-  'http://127.0.0.1:7242/ingest/50cb2714-8d8e-485c-805d-14fbde20aa84'
-const __SP_DEBUG_SESSION__ = 'debug-session'
-const __SP_DEBUG_RUN__ = 'bughunt-pre'
-function spLog(hypothesisId, location, message, data) {
-    try {
-        fetch(__SP_DEBUG_ENDPOINT__, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                sessionId: __SP_DEBUG_SESSION__,
-                runId: __SP_DEBUG_RUN__,
-                hypothesisId,
-                location,
-                message,
-                data,
-                timestamp: Date.now()
-            })
-        }).catch(()=>{});
-    } catch {}
-}
-// #endregion agent log
-
 // --- 1. STATE MANAGEMENT ---
 const tokenToReal = Object.create(null);
 const realToToken = Object.create(null);
@@ -53,21 +29,9 @@ function stableHash(str) {
     return (h >>> 0).toString(16);
 }
 
-// #region agent log
-spLog('H_INIT', 'src/content.js:init', 'content_script_loaded', {
-    host: location.host,
-    href: location.href,
-    isPremium,
-    DEBUG
-});
-// #endregion agent log
-
 // Sync state with Popup
 chrome.storage.local.get(['protectionActive'], (res) => {
     isProtectionActive = res.protectionActive !== false;
-    // #region agent log
-    spLog('H_STATE', 'src/content.js:storage.local.get', 'protectionActive_loaded', { isProtectionActive });
-    // #endregion agent log
 });
 
 async function getTabId() {
@@ -96,9 +60,6 @@ async function loadVault() {
             const { piiMap: storedMap, updatedAt, lastSecuredPromptHash: storedHash } = entry;
             if (!updatedAt || Date.now() - updatedAt > VAULT_TTL_MS) {
                 chrome.storage.session.remove([vaultKey], () => resolve());
-                // #region agent log
-                spLog('H_VAULT', 'src/content.js:loadVault', 'vault_expired_removed', { vaultKey, ageMs: updatedAt ? (Date.now() - updatedAt) : null });
-                // #endregion agent log
                 return;
             }
             // Backward compat: if an old piiMap is present, keep it but prefer token maps when available.
@@ -107,14 +68,6 @@ async function loadVault() {
             if (entry.tokenCounters && typeof entry.tokenCounters === 'object') Object.assign(tokenCounters, entry.tokenCounters);
             if (storedHash) lastSecuredPromptHash = storedHash;
             logDebug('Vault loaded', { tokens: Object.keys(tokenToReal).length });
-            // #region agent log
-            spLog('H_VAULT', 'src/content.js:loadVault', 'vault_loaded', {
-                vaultKey,
-                tokenCount: Object.keys(tokenToReal).length,
-                counterTypes: Object.keys(tokenCounters).length,
-                hasStoredHash: !!storedHash
-            });
-            // #endregion agent log
             resolve();
         });
     });
@@ -146,9 +99,6 @@ async function clearVault() {
     currentTabId = await getTabId();
     if (currentTabId != null) vaultKey = `vault:${currentTabId}`;
     await loadVault();
-    // #region agent log
-    spLog('H_VAULT', 'src/content.js:initVault', 'vault_init_done', { currentTabId, vaultKey, tokenCount: Object.keys(tokenToReal).length });
-    // #endregion agent log
 })();
 
 /*
@@ -366,17 +316,6 @@ function sanitize(text) {
         saveVault();
     }
 
-    // #region agent log
-    spLog('H_SECURE_SEND', 'src/content.js:sanitize', 'sanitize_done', {
-        protectionActive: isProtectionActive,
-        itemsFound,
-        promptLen: String(text ?? '').length,
-        cleanLen: String(cleanText ?? '').length,
-        tokenCount: Object.keys(tokenToReal).length,
-        counterTypes: Object.keys(tokenCounters).length
-    });
-    // #endregion agent log
-
     return cleanText;
 }
 
@@ -398,16 +337,7 @@ function restoreResponsesAndMaybeWatermark({ addWatermark }) {
 }
 
 function detectPII(text) {
-    const res = engineDetectPII(text, { mode: 'warn' });
-    // #region agent log
-    spLog('H_WARN', 'src/content.js:detectPII', 'detectPII_warn_done', {
-        detected: !!res?.detected,
-        reasonCount: Array.isArray(res?.reasons) ? res.reasons.length : null,
-        types: Array.isArray(res?.types) ? res.types : null,
-        textLen: String(text ?? '').length
-    });
-    // #endregion agent log
-    return res;
+    return engineDetectPII(text, { mode: 'warn' });
 }
 
 function ensureWarningUI() {
