@@ -1,0 +1,124 @@
+[
+  {
+    "id": "law_fp_01_plain_legal",
+    "category": "fp_legal",
+    "expected": "fp",
+    "text": "Summarize the key legal risks in a standard NDA and propose 5 clauses to strengthen confidentiality. Do not include any personal details."
+  },
+  {
+    "id": "law_fp_02_vocabulary_only",
+    "category": "fp_legal",
+    "expected": "fp",
+    "text": "Write a short explainer defining the terms: passport, driver's license, SSN, IBAN, SWIFT, routing number. Use them as vocabulary only, no identifiers."
+  },
+  {
+    "id": "acct_fp_03_amounts_only",
+    "category": "fp_accounting",
+    "expected": "fp",
+    "text": "Create a monthly budget template with example amounts: 1200, 450, 89.99, 3000, 150. Include headings for revenue/COGS/expenses."
+  },
+  {
+    "id": "hr_fp_04_policy_text",
+    "category": "fp_hr",
+    "expected": "fp",
+    "text": "Draft an HR policy describing how to store employee records securely and who can access them. Avoid using any real or fake identifiers."
+  },
+  {
+    "id": "acct_fp_05_sku_like_codes",
+    "category": "fp_accounting",
+    "expected": "fp",
+    "text": "Generate inventory SKU codes for products: AB1234567, CD9876543, EF0000001, GH7654321. Clarify they are SKUs, not bank or identity numbers."
+  },
+  {
+    "id": "law_fp_06_unlabeled_iban_like",
+    "category": "fp_legal",
+    "expected": "fp",
+    "text": "In a fictional story, a character sees the string DE89370400440532013000 on a billboard as a random sequence. Do not label it as IBAN."
+  },
+  {
+    "id": "hr_fp_07_dates_not_dob",
+    "category": "fp_hr",
+    "expected": "fp",
+    "text": "Create a hiring timeline with milestones: 2026-02-01, 2026-02-15, 2026-03-01. These are project dates, not birth dates."
+  },
+  {
+    "id": "acct_fp_08_ticket_numbers",
+    "category": "fp_accounting",
+    "expected": "fp",
+    "text": "Write a support update referencing ticket numbers: TCK-1023, TCK-2048, TCK-4096. No client data."
+  },
+
+  {
+    "id": "law_tp_01_email_phone_caseid",
+    "category": "tp_legal",
+    "expected": "tp",
+    "text": "Draft a final demand letter for the client. Case # MATTER-4F7A-19. Send it to danielle.lawson@firmmail.com and request they call +1 (415) 555-0132 today."
+  },
+  {
+    "id": "law_tp_02_israeli_phone_email",
+    "category": "tp_legal",
+    "expected": "tp",
+    "text": "Prepare a notice to the opposing party and include contact details: advocate@legal.co.il and 054-9876543."
+  },
+  {
+    "id": "law_tp_03_passport_anchored",
+    "category": "tp_legal",
+    "expected": "tp",
+    "text": "Client verification: Passport number: X1234567. Draft a checklist for KYC."
+  },
+  {
+    "id": "law_tp_04_drivers_license_anchored",
+    "category": "tp_legal",
+    "expected": "tp",
+    "text": "Evidence log: Driver's License number: A1B2C3D4E5. Provide a summary for the file."
+  },
+  {
+    "id": "acct_tp_05_iban_swift",
+    "category": "tp_accounting",
+    "expected": "tp",
+    "text": "Wire instructions: IBAN: DE89370400440532013000 and SWIFT: DEUTDEFFXXX. Please format as a payment email."
+  },
+  {
+    "id": "acct_tp_06_routing_account",
+    "category": "tp_accounting",
+    "expected": "tp",
+    "text": "Bank transfer details: routing number: 123456789 and account number: 12345678. Create a remittance note."
+  },
+  {
+    "id": "acct_tp_07_card_cvv",
+    "category": "tp_accounting",
+    "expected": "tp",
+    "text": "Process this card for a test transaction: 4111 1111 1111 1111, CVV: 123. Summarize the steps."
+  },
+  {
+    "id": "hr_tp_08_ssn_ein",
+    "category": "tp_hr",
+    "expected": "tp",
+    "text": "Onboarding checklist: SSN 123-45-6789, and vendor EIN 12-3456789. Create secure handling instructions."
+  },
+  {
+    "id": "hr_tp_09_dob",
+    "category": "tp_hr",
+    "expected": "tp",
+    "text": "Employee profile fields include DOB: 1990-07-12. Generate a privacy notice for HR."
+  },
+  {
+    "id": "hr_tp_10_israeli_tz_anchored",
+    "category": "tp_hr",
+    "expected": "tp",
+    "text": "New hire verification: TZ: 123456782. Provide a checklist for collecting documents."
+  },
+  {
+    "id": "acct_tp_11_vat_eori",
+    "category": "tp_accounting",
+    "expected": "tp",
+    "text": "Customs documentation: EORI number: DE1234567890123 and VAT ID: FR123456789. Draft the filing summary."
+  },
+  {
+    "id": "law_tp_12_caseid_patient",
+    "category": "tp_legal",
+    "expected": "tp",
+    "text": "Medical-legal summary: patient id: MRN-7K2-19A. Create a short summary without adding new details."
+  }
+]
+

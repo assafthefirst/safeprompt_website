@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "SafePrompt: AI Privacy & Anonymizer",
+  "version": "1.0.0",
+  "description": "Protect PII & Sensitive Data in ChatGPT automatically.",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["activeTab", "storage", "tabs"],
+  "background": { "service_worker": "src/background.js" },
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*",
+    "https://grok.com/*",
+    "https://x.ai/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*",
+        "https://grok.com/*",
+        "https://x.ai/*"
+      ],
+      "js": ["src/content.js"]
+    }
+  ]
+}

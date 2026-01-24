@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafePrompt — Report an issue</title>
+    <link rel="stylesheet" href="report.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">
+          <img class="brandLogo" src="icons/icon48.png" alt="SafePrompt" />
+          <div>
+            <div class="brandName">SafePrompt</div>
+            <div class="brandSub">Report an issue</div>
+          </div>
+        </div>
+        <div class="meta">
+          <span class="pill" id="sitePill">Site: —</span>
+          <span class="pill" id="versionPill">v—</span>
+        </div>
+      </header>
+
+      <main class="card">
+        <div class="cardTitle">Tell us what happened</div>
+        <div class="cardHint">
+          We’ll open a Google Form for the actual submission. You can optionally copy anonymized diagnostics (no prompt/response text).
+        </div>
+
+        <div class="grid">
+          <label class="field">
+            <span class="label">Category</span>
+            <select id="category">
+              <option value="false_positive">False positive (warned but shouldn’t)</option>
+              <option value="missed_pii">Missed PII (should have warned/sanitized)</option>
+              <option value="restore_issue">Reveal/Restore issue</option>
+              <option value="ui_issue">UI / buttons not showing</option>
+              <option value="performance">Performance / lag</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="label">Short description</span>
+            <input id="summary" type="text" maxlength="140" placeholder="One sentence summary" />
+          </label>
+
+          <label class="field fieldFull">
+            <span class="label">Steps to reproduce (optional)</span>
+            <textarea id="steps" rows="5" placeholder="1) …&#10;2) …"></textarea>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button class="btnPrimary" id="submitBtn">Submit report</button>
+          <button class="btnSecondary" id="openFormBtn">Open Google Form</button>
+          <button class="btnSecondary" id="copyDiagBtn">Copy diagnostics</button>
+        </div>
+
+        <div class="status" id="statusText"></div>
+
+        <details class="details">
+          <summary>What diagnostics include (no PII)</summary>
+          <ul>
+            <li>Extension version + build info</li>
+            <li>Active site hostname</li>
+            <li>Protection enabled/disabled + protectedCount</li>
+            <li>Vault token counters (counts only)</li>
+            <li>Timestamp</li>
+          </ul>
+        </details>
+      </main>
+
+      <footer class="footer">
+        <span class="muted">SafePrompt v1</span>
+        <a class="link" id="openFormLink" href="#" target="_blank" rel="noreferrer">Open form in new tab</a>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/report.js"></script>
+  </body>
+</html>
+

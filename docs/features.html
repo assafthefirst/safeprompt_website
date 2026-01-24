@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafePrompt — Features</title>
+    <meta name="description" content="SafePrompt features: Secure Send, unlimited warn, restore, and coverage for PII and secrets." />
+    <link rel="icon" href="assets/icon48.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap">
+        <div class="topbarInner">
+          <a class="brand" href="./">
+            <img class="brandLogo" src="assets/icon128.png" alt="SafePrompt" />
+            <div>
+              <div class="brandName">SafePrompt</div>
+              <div class="brandTag">Features</div>
+            </div>
+          </a>
+
+          <button class="navToggle" type="button" data-nav-toggle="1" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+          </button>
+
+          <nav class="nav" data-nav="1" aria-label="Primary">
+            <a href="./">Home</a>
+            <a href="features.html">Features</a>
+            <a href="security.html">Security</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="support.html">Support</a>
+            <a class="ctaSmall" data-webstore-link="1" href="#">Install</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <div class="kicker">
+            <span class="kickerDot" aria-hidden="true"></span>
+            <span><strong>Protect yourself and your customers.</strong> Built for client-facing teams.</span>
+          </div>
+          <h1>Features that make LLM work safer.</h1>
+          <p class="subhead">
+            SafePrompt is designed to be simple: it warns you before risky sends, sanitizes with Secure Send, and restores locally when you choose.
+          </p>
+          <div class="ctaRow">
+            <a class="btn btnPrimary" data-webstore-link="1" href="#">Install for Chrome →</a>
+            <a class="btn btnSecondary" href="pricing.html">See pricing</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <h2 class="sectionTitle">Coverage (grouped)</h2>
+          <p class="sectionLead">
+            High-signal categories that matter for SMB workflows — without overwhelming you with an endless list.
+          </p>
+
+          <div class="grid3">
+            <div class="card">
+              <div class="cardTitle">PII</div>
+              <p class="cardText">Emails, phone numbers (US/IL), IDs (multiple regions), dates of birth (context-aware warnings), select address patterns.</p>
+            </div>
+            <div class="card">
+              <div class="cardTitle">Secrets</div>
+              <p class="cardText">JWTs, API keys, GitHub/Slack tokens, Stripe secrets, and private key blocks.</p>
+            </div>
+            <div class="card">
+              <div class="cardTitle">High‑risk identifiers</div>
+              <p class="cardText">Credit cards (validated), IBAN (checksum), SWIFT/BIC (keyword), IP/MAC, GPS, wallet-like addresses.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <h2 class="sectionTitle">Workflow features</h2>
+          <p class="sectionLead">Designed to fit how teams actually use LLMs day to day.</p>
+
+          <div class="grid3">
+            <div class="card">
+              <div class="cardTitle">Warn before send (free)</div>
+              <p class="cardText">If you’re about to send sensitive info, SafePrompt can warn you and suggest Secure Send. Warn is always free.</p>
+            </div>
+            <div class="card">
+              <div class="cardTitle">Secure Send (sanitize)</div>
+              <p class="cardText">Replaces matched values with tokens like <code>[[SP_EMAIL_1]]</code> so sensitive data doesn’t leave your device.</p>
+            </div>
+            <div class="card">
+              <div class="cardTitle">Reveal/Restore</div>
+              <p class="cardText">Swap tokens back locally when you need to review the answer in full context.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <h2 class="sectionTitle">Compatibility</h2>
+          <p class="sectionLead">SafePrompt currently supports:</p>
+          <div class="grid2">
+            <div class="card">
+              <div class="cardTitle">Supported sites</div>
+              <p class="cardText">
+                ChatGPT (<code>chatgpt.com</code>), Claude (<code>claude.ai</code>), Gemini (<code>gemini.google.com</code>), Grok (<code>grok.com</code>), and xAI (<code>x.ai</code>).
+              </p>
+            </div>
+            <div class="card">
+              <div class="cardTitle">Best practices</div>
+              <p class="cardText">
+                Treat SafePrompt as a safety layer, not a substitute for judgment. Always review what you send — especially in regulated workflows.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="card">
+            <div class="grid2" style="align-items: center">
+              <div>
+                <div class="cardTitle" style="font-size: 18px">Install SafePrompt</div>
+                <p class="cardText">Start with unlimited warnings and 5 Secure Sends per month on the free plan.</p>
+              </div>
+              <div style="display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap">
+                <a class="btn btnPrimary" data-webstore-link="1" href="#">Install for Chrome →</a>
+                <a class="btn btnSecondary" href="security.html">Security</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footerInner">
+          <div class="footerLinks">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms</a>
+            <a href="support.html">Support</a>
+          </div>
+          <div class="smallPrint">© <span id="year"></span> SafePrompt. Not affiliated with OpenAI/Anthropic/Google/xAI.</div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+    </script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+

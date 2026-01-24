@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafePrompt — Pricing</title>
+    <meta name="description" content="SafePrompt pricing: free unlimited warnings, 5 Secure Sends/month, or $12.99/month for unlimited Secure Send." />
+    <link rel="icon" href="assets/icon48.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap">
+        <div class="topbarInner">
+          <a class="brand" href="./">
+            <img class="brandLogo" src="assets/icon128.png" alt="SafePrompt" />
+            <div>
+              <div class="brandName">SafePrompt</div>
+              <div class="brandTag">Pricing</div>
+            </div>
+          </a>
+
+          <button class="navToggle" type="button" data-nav-toggle="1" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+          </button>
+
+          <nav class="nav" data-nav="1" aria-label="Primary">
+            <a href="./">Home</a>
+            <a href="features.html">Features</a>
+            <a href="security.html">Security</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="support.html">Support</a>
+            <a class="ctaSmall" data-webstore-link="1" href="#">Install</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <div class="kicker">
+            <span class="kickerDot" aria-hidden="true"></span>
+            <span><strong>Freemium.</strong> Unlimited warnings. Pay for unlimited Secure Send.</span>
+          </div>
+          <h1>Pricing</h1>
+          <p class="subhead">Start free. Upgrade when you need more Secure Sends.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="grid2">
+            <div class="card">
+              <div class="cardTitle" style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;">
+                <span>Free</span>
+                <span style="color: var(--muted); font-weight: 900;">$0</span>
+              </div>
+              <p class="cardText" style="margin-top:8px;">Perfect for getting started.</p>
+              <ul style="margin:12px 0 0; padding-left:18px; color: rgba(17,24,39,0.75); line-height:1.7;">
+                <li><strong>Unlimited Warn</strong> (always free)</li>
+                <li><strong>5 Secure Sends / month</strong></li>
+                <li>Reveal/Restore (local)</li>
+                <li>Clear Session History</li>
+              </ul>
+              <div class="ctaRow" style="margin-top:16px;">
+                <a class="btn btnPrimary" data-webstore-link="1" href="#">Install for Chrome →</a>
+                <a class="btn btnSecondary" href="features.html">See features</a>
+              </div>
+              <div class="note">After you reach 5 Secure Sends in a month, Warn continues; Secure Send resumes next month (or upgrade).</div>
+            </div>
+
+            <div class="card">
+              <div class="cardTitle" style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;">
+                <span>Pro</span>
+                <span style="font-weight: 900;">$12.99<span style="font-size:12px;color:var(--muted);font-weight:800;">/mo</span></span>
+              </div>
+              <p class="cardText" style="margin-top:8px;">For client-facing work where you need unlimited protection.</p>
+              <ul style="margin:12px 0 0; padding-left:18px; color: rgba(17,24,39,0.75); line-height:1.7;">
+                <li><strong>Unlimited Warn</strong></li>
+                <li><strong>Unlimited Secure Send</strong></li>
+                <li>Reveal/Restore (local)</li>
+                <li>Clear Session History</li>
+              </ul>
+              <div class="ctaRow" style="margin-top:16px;">
+                <a class="btn btnPrimary" data-upgrade-link="1" href="#">Upgrade to Pro →</a>
+                <a class="btn btnSecondary" href="security.html">Security</a>
+              </div>
+              <div class="note">Upgrade checkout link is a placeholder for now (we’ll connect the real flow soon).</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="faq">
+            <details>
+              <summary>What counts as a “Secure Send”?</summary>
+              <p>Each click on <strong>Secure Send</strong> counts as one usage.</p>
+            </details>
+            <details>
+              <summary>Is Warn really free forever?</summary>
+              <p>Yes. Warn is unlimited in the free plan.</p>
+            </details>
+            <details>
+              <summary>Do you collect data when I upgrade?</summary>
+              <p>SafePrompt is built around local-only processing. We’ll keep the Privacy Policy accurate as the billing flow goes live.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footerInner">
+          <div class="footerLinks">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms</a>
+            <a href="support.html">Support</a>
+          </div>
+          <div class="smallPrint">© <span id="year"></span> SafePrompt. Not affiliated with OpenAI/Anthropic/Google/xAI.</div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+    </script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+

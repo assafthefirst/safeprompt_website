@@ -1,0 +1,135 @@
+[
+  {
+    "id": "fp_01_plain_english",
+    "category": "fp_plain",
+    "expected": "fp",
+    "text": "Generate the video I asked you. Make it 30 seconds, add captions, and a clean ending screen."
+  },
+  {
+    "id": "fp_02_swift_like_unlabeled",
+    "category": "fp_plain",
+    "expected": "fp",
+    "text": "Create a fake bank-code-looking string for a fictional universe: DEUTDEFFXXX ABCDGB2LXXX NEDSZAJJ. Do not treat it as real and do not label it as SWIFT/BIC."
+  },
+  {
+    "id": "fp_03_vocab_only",
+    "category": "fp_plain",
+    "expected": "fp",
+    "text": "Write a finance tutorial that mentions the words routing, account, CVV, passport as vocabulary terms, but do NOT provide any numbers."
+  },
+  {
+    "id": "fp_04_sku_table",
+    "category": "fp_devops",
+    "expected": "fp",
+    "text": "Create a table of product SKUs (not identity docs): AB1234567, CD9876543, EF0000001, GH7654321. Explain they are SKUs."
+  },
+  {
+    "id": "fp_05_9digit_numbers",
+    "category": "fp_numeric",
+    "expected": "fp",
+    "text": "Give me 10 random 9-digit numbers for testing formatting only: 123456789 987654321 111222333 444555666 777888999."
+  },
+  {
+    "id": "fp_06_doc_ip_ranges",
+    "category": "fp_devops",
+    "expected": "fp",
+    "text": "Explain RFC example ranges and include these examples: 192.0.2.10, 2001:db8::1, 00:11:22:33:44:55. Make clear they are documentation examples."
+  },
+  {
+    "id": "fp_07_postcode_in_story",
+    "category": "fp_geo",
+    "expected": "fp",
+    "text": "In a puzzle story, the code SW1A 1AA appears as a clue (not an address). Write a short paragraph around it."
+  },
+  {
+    "id": "fp_08_eth_as_hash",
+    "category": "fp_devops",
+    "expected": "fp",
+    "text": "For programming practice, analyze this hex string as a hash (not a wallet): 0x52908400098527886E0F7030069857D2E4169EE7."
+  },
+  {
+    "id": "tp_01_email_phone_name",
+    "category": "tp_legal",
+    "expected": "tp",
+    "expectedReasons": ["Email", "Israeli Phone", "Name"],
+    "text": "Draft a formal letter to Garrett Carroll. Email: Rodger.Emmerich75@gmail.com. Call 054-9876543 tomorrow."
+  },
+  {
+    "id": "tp_02_swift_iban",
+    "category": "tp_accounting",
+    "expected": "tp",
+    "expectedReasons": ["SWIFT", "IBAN"],
+    "text": "Send payment instructions: SWIFT/BIC: DEUTDEFFXXX and IBAN: DE89370400440532013000."
+  },
+  {
+    "id": "tp_03_credit_card",
+    "category": "tp_accounting",
+    "expected": "tp",
+    "expectedReasons": ["Credit Card", "CVV"],
+    "text": "Process card 4111 1111 1111 1111, CVV: 123, exp 12/26."
+  },
+  {
+    "id": "tp_04_ssn_ein",
+    "category": "tp_hr",
+    "expected": "tp",
+    "expectedReasons": ["US SSN", "US EIN"],
+    "text": "Employee onboarding: SSN 123-45-6789 and EIN 12-3456789."
+  },
+  {
+    "id": "tp_05_ipv4_ipv6_mac",
+    "category": "tp_devops",
+    "expected": "tp",
+    "expectedReasons": ["IPv4", "IPv6", "MAC"],
+    "text": "Network report: IPv4 10.0.0.12, IPv6 2001:0db8:85a3:0000:0000:8a2e:0370:7334, MAC 00:1A:2B:3C:4D:5E."
+  },
+  {
+    "id": "tp_06_de_tax_ids",
+    "category": "tp_accounting",
+    "expected": "tp",
+    "expectedReasons": ["DE VAT", "DE Steuer-ID"],
+    "text": "German tax info: DE VAT ID: DE123456789 and Steuer-ID: 12 345 678 901."
+  },
+  {
+    "id": "tp_07_uk_ids",
+    "category": "tp_accounting",
+    "expected": "tp",
+    "expectedReasons": ["NINO", "Postcode", "NHS", "UTR"],
+    "text": "UK details: NINO QQ 12 34 56 C, Postcode SW1A 1AA, NHS number: 943 476 5919, UTR: 123 456 7890."
+  },
+  {
+    "id": "tp_08_bank_routing_account",
+    "category": "tp_accounting",
+    "expected": "tp",
+    "expectedReasons": ["ROUTING", "BANKACCT"],
+    "text": "Please use routing number: 123456789 and account number: 12345678 for the transfer."
+  },
+  {
+    "id": "tp_09_passport_driver_license",
+    "category": "tp_legal",
+    "expected": "tp",
+    "expectedReasons": ["PASSPORT", "DL"],
+    "text": "Client docs: passport number: 123456789 and driver's license number: A1B2C3D4."
+  },
+  {
+    "id": "tp_10_geo_coords",
+    "category": "tp_geo",
+    "expected": "tp",
+    "expectedReasons": ["GEO"],
+    "text": "The incident occurred at 32.0853, 34.7818 and we need a summary."
+  },
+  {
+    "id": "tp_11_eori_vat",
+    "category": "tp_trade",
+    "expected": "tp",
+    "expectedReasons": ["EORI", "VAT"],
+    "text": "Customs filing: EORI: DE1234567890123 and VAT ID: FR123456789."
+  },
+  {
+    "id": "tp_12_npi",
+    "category": "tp_health",
+    "expected": "tp",
+    "expectedReasons": ["NPI"],
+    "text": "Provider credentialing: NPI number: 1234567890."
+  }
+]
+
