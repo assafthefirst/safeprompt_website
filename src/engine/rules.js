@@ -110,12 +110,106 @@ export const PII_RULES = [
     regex: /\b(?:handelsregister|hrb|hra)\s*(?:nr\.?|number|no\.?|#|id)?\s*[:\-]?\s*(?:hrb|hra)?\s*\d{1,6}\b/gi,
   },
 
+  // --- France ---
+  {
+    name: 'French NIR (keyword anchored)',
+    type: 'NIR',
+    regex: /\b(?:NIR|num[ée]ro\s*(?:de\s*)?s[ée]curit[ée]\s*sociale|s[ée]curit[ée]\s*sociale|social\s*security)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*[12]\s?\d{2}\s?\d{2}\s?\d{2}\s?\d{3}\s?\d{3}\s?\d{2}\b/gi,
+  },
+  {
+    name: 'French CNI (keyword anchored)',
+    type: 'NATID',
+    regex: /\b(?:carte\s*(?:nationale\s*)?d[''\s]?identit[ée]|CNI|french\s*(?:national\s*)?id)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*[A-Z0-9]{10,12}\b/gi,
+  },
+
+  // --- Spain ---
+  {
+    name: 'Spanish DNI (keyword anchored)',
+    type: 'NATID',
+    captureGroup: 1,
+    regex: /\b(?:DNI|documento\s*nacional|spanish\s*(?:national\s*)?id)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*(\d{8}[A-Z])\b/gi,
+  },
+  {
+    name: 'Spanish NIE (keyword anchored)',
+    type: 'NATID',
+    captureGroup: 1,
+    regex: /\b(?:NIE|n[uú]mero\s*de\s*identidad\s*de\s*extranjero|foreigner\s*id)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*([XYZ]\d{7}[A-Z])\b/gi,
+  },
+
+  // --- Italy ---
+  {
+    name: 'Italian Codice Fiscale (keyword anchored)',
+    type: 'NATID',
+    regex: /\b(?:codice\s*fiscale|CF|fiscal\s*code|italian\s*tax\s*(?:code|id))\s*[:\-]?\s*[A-Z]{6}\d{2}[A-EHLMPRST]\d{2}[A-Z]\d{3}[A-Z]\b/gi,
+  },
+  {
+    name: 'Italian Partita IVA (keyword anchored)',
+    type: 'VAT',
+    regex: /\b(?:partita\s*IVA|P\.?\s*IVA|italian\s*vat)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*(?:IT)?\d{11}\b/gi,
+  },
+
+  // --- Belgium ---
+  {
+    name: 'Belgian National Number (keyword anchored)',
+    type: 'NATID',
+    regex: /\b(?:rijksregisternummer|national\s*(?:register\s*)?number|belgian\s*(?:national\s*)?(?:number|id)|nn)\s*[:\-]?\s*\d{2}[.\s]?\d{2}[.\s]?\d{2}[.\s-]?\d{3}[.\s]?\d{2}\b/gi,
+  },
+
+  // --- Netherlands ---
+  {
+    name: 'Dutch BSN (keyword anchored)',
+    type: 'NATID',
+    regex: /\b(?:BSN|burgerservicenummer|burger\s*service\s*nummer|dutch\s*(?:citizen\s*)?(?:number|id)|sofi\s*nummer)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*\d{9}\b/gi,
+  },
+
+  // --- USA additional ---
+  {
+    name: 'VIN (keyword anchored)',
+    type: 'VIN',
+    regex: /\b(?:VIN|vehicle\s*identification\s*(?:number|no\.?|#))\s*[:\-]?\s*([A-HJ-NPR-Z0-9]{17})\b/gi,
+    captureGroup: 1,
+  },
+  {
+    name: 'DEA Number (keyword anchored)',
+    type: 'DEA',
+    regex: /\b(?:DEA|drug\s*enforcement)\s*(?:number|no\.?|#|id|reg(?:istration)?)?\s*[:\-]?\s*[A-Z]{2}\d{7}\b/gi,
+  },
+  {
+    name: 'Medicare Beneficiary ID (keyword anchored)',
+    type: 'INSURANCE',
+    regex: /\b(?:medicare|MBI)\s*(?:beneficiary\s*)?(?:ID|number|no\.?|#)?\s*[:\-]?\s*\d[A-Z][A-Z0-9]\d[-]?[A-Z][A-Z0-9]\d[-]?[A-Z]{2}\d{2}\b/gi,
+  },
+  {
+    name: 'US License Plate (keyword anchored)',
+    type: 'PLATE',
+    regex: /\b(?:license\s*plate|plate\s*(?:number|no\.?|#)|registration\s*(?:number|no\.?|plate))\s*[:\-]?\s*[A-Z0-9]{2,4}[-\s]?[A-Z0-9]{2,5}\b/gi,
+  },
+
+  // --- UK additional ---
+  {
+    name: 'UK Driving Licence (keyword anchored)',
+    type: 'DL',
+    regex: /\b(?:driving\s*licen[cs]e|driver'?s?\s*licen[cs]e|DVLA)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*[A-Z]{1,5}\d{6,7}[A-Z0-9]{0,8}\b/gi,
+  },
+
+  // --- Generic keyword-anchored national / tax IDs (catch-all for labelled data) ---
+  {
+    name: 'Tax ID (generic keyword anchored)',
+    type: 'TAXID',
+    regex: /\b(?:tax\s*(?:id(?:entification)?|number|no\.?|#|code)|taxpayer\s*(?:id|number)|TIN|ITIN)\s*[:\-]?\s*[A-Z0-9][\w\-]{5,15}\b/gi,
+  },
+  {
+    name: 'National ID (generic keyword anchored)',
+    type: 'NATID',
+    regex: /\b(?:national\s*(?:id(?:entity)?|identification)\s*(?:number|no\.?|#|card)?|citizen\s*(?:id|number)|personal\s*(?:id|number))\s*[:\-]?\s*[A-Z0-9][\w\-]{5,18}\b/gi,
+  },
+
   // Financial / IDs
   // Keyword-anchored CC: bypasses Luhn when explicitly labelled (e.g. "credit card: 4539 8214 ...")
   {
     name: 'Credit Card (keyword anchored)',
     type: 'CC_ANCHOR',
-    regex: /\b(?:credit\s*card|card\s*number|card\s*no\.?|card\s*#|cc\s*(?:number|no\.?|#)?)\s*[:\-]?\s*((?:\d[\s-]*?){13,19}\d)\b/gi,
+    regex: /\b(?:credit\s*card|card\s*number|card\s*no\.?|card\s*#|cc\s*(?:number|no\.?|#)?)\s*[:\-]?\s*(\d(?:[\s-]*\d){12,18})\b/gi,
     captureGroup: 1,
   },
   { name: 'Credit Card', type: 'CC', regex: /\b(?:\d[ -]*?){13,19}\b/g },
