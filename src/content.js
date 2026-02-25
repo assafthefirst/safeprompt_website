@@ -605,24 +605,36 @@ function injectControls() {
         doSecureSend();
     };
 
-    // Restore Handler
+    // Restore Handler (right-click fallback)
     actionBtn.oncontextmenu = (e) => {
         e.preventDefault();
-        restoreResponsesAndMaybeWatermark({ addWatermark: true });
+        restoreResponsesAndMaybeWatermark({ addWatermark: !isPremium });
     };
 
-    // Reveal Handler (same as restore, but explicit + hides itself after use)
+    // Reveal Handler: two modes depending on whether the prompt was already sent
     revealBtn.onclick = () => {
         const promptEl = getComposerSnapshot().prompt;
         const promptText = promptEl ? siteGetPromptText(promptEl) : '';
         const hasPromptTokens = /\[\[SP_[A-Z0-9_]+\]\]/.test(promptText);
-        const responseNodes = siteFindResponseNodes().filter(siteIsVisible);
-        const responseNodesWithTokens = responseNodes.filter((n) => /\[\[SP_[A-Z0-9_]+\]\]/.test(n.textContent || '')).length;
-        const restored = restoreResponsesAndMaybeWatermark({ addWatermark: true });
-        // Hide only when we restored tokens in response nodes (actual LLM output reveal).
-        // If reveal only touched the prompt (pre-send), keep button visible for post-response reveal.
-        const shouldHideReveal = restored > 0 && responseNodesWithTokens > 0;
-        if (shouldHideReveal) hideRevealBtn();
+
+        if (hasPromptTokens && promptEl) {
+            // PRE-SEND: prompt still has tokens → user hasn't sent yet.
+            // Restore original data in the prompt so the user can see/edit it.
+            let restoredPrompt = restore(promptText);
+            // Strip the token-preserve hint we prepended during Secure Send
+            if (restoredPrompt.startsWith(TOKEN_PRESERVE_HINT)) {
+                restoredPrompt = restoredPrompt.slice(TOKEN_PRESERVE_HINT.length).replace(/^\n+/, '');
+            }
+            siteSetPromptText(promptEl, restoredPrompt);
+            // Invalidate the secured hash so the warn-before-send fires again
+            lastSecuredPromptHash = null;
+            hideRevealBtn();
+            // Secure Send stays visible – user must re-secure before sending
+        } else {
+            // POST-SEND: prompt was sent → restore tokens in the LLM response
+            const restored = restoreResponsesAndMaybeWatermark({ addWatermark: !isPremium });
+            if (restored > 0) hideRevealBtn();
+        }
     };
 
     container.appendChild(upgradeBtn);

@@ -111,6 +111,13 @@ export const PII_RULES = [
   },
 
   // Financial / IDs
+  // Keyword-anchored CC: bypasses Luhn when explicitly labelled (e.g. "credit card: 4539 8214 ...")
+  {
+    name: 'Credit Card (keyword anchored)',
+    type: 'CC_ANCHOR',
+    regex: /\b(?:credit\s*card|card\s*number|card\s*no\.?|card\s*#|cc\s*(?:number|no\.?|#)?)\s*[:\-]?\s*((?:\d[\s-]*?){13,19}\d)\b/gi,
+    captureGroup: 1,
+  },
   { name: 'Credit Card', type: 'CC', regex: /\b(?:\d[ -]*?){13,19}\b/g },
   { name: 'Card CVV/CVC (keyword anchored)', type: 'CVV', regex: /\b(?:cvv|cvc|cid)\s*[:\-]?\s*\d{3,4}\b/gi },
   { name: 'US SSN', type: 'SSN', regex: /\b\d{3}-\d{2}-\d{4}\b/g },
@@ -141,6 +148,33 @@ export const PII_RULES = [
   // Phones
   { name: 'US/Intl Phone', type: 'PHONE', regex: /\b\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b/g },
 
+  // Health Insurance Member ID (keyword anchored, e.g. HIX-784392651, HIN-123456)
+  {
+    name: 'Health Insurance Member ID (keyword anchored)',
+    type: 'INSURANCE',
+    regex: /\b(?:health\s*insurance|insurance\s*(?:member|id)|member\s*id|group\s*id|subscriber\s*id|policy\s*(?:number|no\.?|#|id))\s*[:\-]?\s*[A-Z]{2,5}[-]?\d{5,12}\b/gi,
+  },
+  // Structural health insurance ID (HIX-nnnnnn pattern without keyword)
+  {
+    name: 'Health Insurance ID (HIX/HIN pattern)',
+    type: 'INSURANCE',
+    regex: /\b(?:HIX|HIN|HIC|MBI)[-]?\d{6,12}\b/g,
+  },
+
+  // US Home Address (structural: number + street name + street type + city, ST ZIP)
+  {
+    name: 'US Home Address',
+    type: 'ADDRESS',
+    regex: /\b\d{1,5}\s+[A-Za-z]+(?:\s+[A-Za-z]+){0,3}\s+(?:Street|St\.?|Avenue|Ave\.?|Boulevard|Blvd\.?|Drive|Dr\.?|Lane|Ln\.?|Road|Rd\.?|Way|Court|Ct\.?|Place|Pl\.?|Circle|Cir\.?|Trail|Trl\.?|Terrace|Ter\.?|Parkway|Pkwy\.?)[,.]?\s*[A-Za-z]+(?:\s+[A-Za-z]+){0,2}[,.]?\s+[A-Z]{2}\s+\d{5}(?:-\d{4})?\b/g,
+  },
+  // Keyword-anchored address (e.g. "home address: 123 Main St ...")
+  {
+    name: 'Address (keyword anchored)',
+    type: 'ADDRESS',
+    captureGroup: 1,
+    regex: /\b(?:home\s*address|mailing\s*address|street\s*address|residential\s*address|address)\s*[:\-]\s*(\d{1,5}\s+[A-Za-z][\w\s,.]+(?:\d{5}(?:-\d{4})?))\b/gi,
+  },
+
   // Passport (general) - keyword anchored to reduce collisions with random alphanumerics
   {
     name: 'Passport (General) (keyword anchored)',
@@ -156,7 +190,7 @@ export const PII_RULES = [
   {
     name: "US Driver's License (keyword anchored)",
     type: 'DL',
-    regex: /\b(?:driver'?s\s*license|driving\s*license|dl)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*[A-Z0-9]{6,12}\b/gi,
+    regex: /\b(?:driver'?s?\s*license|driving\s*license|dl)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*(?:[A-Z]{2}\s+)?[A-Z]?\d{5,10}\b/gi,
   },
 
   // Keyword-anchored IDs

@@ -116,6 +116,7 @@ export function sanitize(text, state, { protectionActive } = {}) {
   for (const rule of PII_RULES) {
     cleanText = cleanText.replace(rule.regex, (match, ...args) => {
       // Validate-only tokenization for certain high-FP types
+      // CC_ANCHOR (keyword-labelled) skips Luhn – the user explicitly said "credit card"
       if (rule.type === 'CC' && !isValidCreditCard(match)) return match
       if (rule.type === 'IBAN' && !isValidIBAN(match)) return match
       if (rule.type === 'ID' && rule.name?.includes?.('Israeli ID') && !isValidIsraeliId(match)) return match
@@ -149,7 +150,7 @@ export function detectPII(text, { mode = 'warn' } = {}) {
   const hasDigits = /\d/.test(s)
   const hasAt = s.includes('@')
   const hasColon = s.includes(':')
-  const hasPIIKeywords = /\b(iban|swift|bic|passport|cvv|cvc|routing|aba|ach|account|acct|eori|vat|nino|nhs|utr|postcode|ip|ipv6|mac|key|token|ssn|ein)\b/i.test(s)
+  const hasPIIKeywords = /\b(iban|swift|bic|passport|cvv|cvc|routing|aba|ach|account|acct|eori|vat|nino|nhs|utr|postcode|ip|ipv6|mac|key|token|ssn|ein|credit\s*card|card\s*number|insurance|member\s*id|policy|driver|license|address|street|avenue|drive|boulevard)\b/i.test(s)
 
   const names = detectNames(s)
   // Conservative: only treat names as PII signal for warnings if they look like a full name.
@@ -227,7 +228,8 @@ export function detectPII(text, { mode = 'warn' } = {}) {
           if (rule.type === 'IP' || rule.type === 'IP6' || rule.type === 'MAC' || rule.type === 'GEO' || rule.type === 'WALLET') continue
         }
 
-        // CC / IBAN: validate before warning (reduce numeric/SKU collisions)
+        // CC_ANCHOR: keyword-labelled card numbers always warn (no Luhn needed)
+        // CC (bare): validate before warning (reduce numeric/SKU collisions)
         if (rule.type === 'CC') {
           if (!hasAnyValidMatch(rule, isValidCreditCard)) continue
           reasons.push(rule.name)

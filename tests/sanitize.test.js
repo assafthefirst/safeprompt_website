@@ -70,5 +70,58 @@ describe('sanitize', () => {
     expect(warn.detected).toBe(true)
     expect(warn.types).toContain('ID')
   })
+
+  it('tokenizes keyword-anchored credit card (bypasses Luhn)', () => {
+    const state = { tokenToReal: {}, realToToken: {}, tokenCounters: {} }
+    const input = 'Credit Card Number: 4539 8214 7753 2196'
+    const { cleanText, itemsFound } = sanitize(input, state, { protectionActive: true })
+    expect(itemsFound).toBeGreaterThan(0)
+    expect(cleanText).toMatch(/\[\[SP_CC_ANCHOR_\d+\]\]/)
+    expect(cleanText).not.toContain('4539 8214 7753 2196')
+  })
+
+  it('detects and warns on keyword-anchored credit card', () => {
+    const warn = detectPII('Credit Card Number: 4539 8214 7753 2196', { mode: 'warn' })
+    expect(warn.detected).toBe(true)
+  })
+
+  it('tokenizes Health Insurance Member ID (HIX pattern)', () => {
+    const state = { tokenToReal: {}, realToToken: {}, tokenCounters: {} }
+    const input = 'Health Insurance Member ID: HIX-784392651'
+    const { cleanText, itemsFound } = sanitize(input, state, { protectionActive: true })
+    expect(itemsFound).toBeGreaterThan(0)
+    expect(cleanText).toMatch(/\[\[SP_INSURANCE_\d+\]\]/)
+    expect(cleanText).not.toContain('HIX-784392651')
+  })
+
+  it('tokenizes bare HIX/HIN/MBI patterns', () => {
+    const state = { tokenToReal: {}, realToToken: {}, tokenCounters: {} }
+    const input = 'member code HIX-784392651 and MBI-1234567890'
+    const { cleanText } = sanitize(input, state, { protectionActive: true })
+    expect(cleanText).toMatch(/\[\[SP_INSURANCE_\d+\]\]/)
+  })
+
+  it('tokenizes Driver License with state prefix', () => {
+    const state = { tokenToReal: {}, realToToken: {}, tokenCounters: {} }
+    const input = "Driver's License: TX K4827319"
+    const { cleanText, itemsFound } = sanitize(input, state, { protectionActive: true })
+    expect(itemsFound).toBeGreaterThan(0)
+    expect(cleanText).toMatch(/\[\[SP_DL_\d+\]\]/)
+  })
+
+  it('tokenizes US Home Address (structural)', () => {
+    const state = { tokenToReal: {}, realToToken: {}, tokenCounters: {} }
+    const input = 'My address is 2741 Westbrook Drive, Dallas, TX 75214 please update records.'
+    const { cleanText, itemsFound } = sanitize(input, state, { protectionActive: true })
+    expect(itemsFound).toBeGreaterThan(0)
+    expect(cleanText).toMatch(/\[\[SP_ADDRESS_\d+\]\]/)
+    expect(cleanText).not.toContain('2741 Westbrook Drive')
+  })
+
+  it('warns on US Home Address in warn mode', () => {
+    const warn = detectPII('Send mail to 2741 Westbrook Drive, Dallas, TX 75214', { mode: 'warn' })
+    expect(warn.detected).toBe(true)
+    expect(warn.types).toContain('ADDRESS')
+  })
 })
 
