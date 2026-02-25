@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { sanitize } from '../src/engine/sanitize.js'
+import { sanitize, detectPII } from '../src/engine/sanitize.js'
 
 describe('sanitize', () => {
   it('replaces common PII with tokens and is consistent within prompt', () => {
@@ -58,6 +58,17 @@ describe('sanitize', () => {
     const outValid = sanitize(valid, state, { protectionActive: true }).cleanText
     expect(outValid).toMatch(/\[\[SP_CC_\d+\]\]/)
     expect(outValid).toMatch(/\[\[SP_IBAN_\d+\]\]/)
+  })
+
+  it('tokenizes and warns on anchored Israeli ID even when checksum is invalid', () => {
+    const state = { tokenToReal: {}, realToToken: {}, tokenCounters: {} }
+    const input = 'id -200644338 and phone 0532489583'
+    const { cleanText } = sanitize(input, state, { protectionActive: true })
+    expect(cleanText).toMatch(/\[\[SP_ID_\d+\]\]/)
+
+    const warn = detectPII(input, { mode: 'warn' })
+    expect(warn.detected).toBe(true)
+    expect(warn.types).toContain('ID')
   })
 })
 

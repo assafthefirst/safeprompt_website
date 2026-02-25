@@ -17,6 +17,11 @@ let allowUnprotectedSendOnce = false;
 
 const VAULT_TTL_MS = 30 * 60 * 1000; // 30 minutes
 const DEBUG = localStorage.getItem('safePromptDebug') === 'true';
+const COMPOSER_CACHE_MS = 1500;
+let composerCache = { ts: 0, has: false, prompt: null, send: null };
+let lastComposerHasState = null;
+const TOKEN_PRESERVE_HINT =
+    'Important: if the prompt contains placeholder tokens (SP_... format), keep them unchanged and copy them verbatim in your response.';
 
 function logDebug(...args) {
     if (DEBUG) console.log('[SafePrompt]', ...args);
@@ -27,6 +32,30 @@ function stableHash(str) {
     let h = 5381;
     for (let i = 0; i < str.length; i++) h = ((h << 5) + h) ^ str.charCodeAt(i);
     return (h >>> 0).toString(16);
+}
+
+function getComposerSnapshot() {
+    const now = Date.now();
+    if (now - composerCache.ts < COMPOSER_CACHE_MS) {
+        // Ensure cached nodes are still in the DOM
+        if (composerCache.prompt && !document.contains(composerCache.prompt)) composerCache.prompt = null;
+        if (composerCache.send && !document.contains(composerCache.send)) composerCache.send = null;
+        return composerCache;
+    }
+    const prompt = siteFindPromptElement({ debug: DEBUG, logDebug });
+    const send = siteFindSendButton();
+    // A writable prompt is enough to render our controls; send button can appear later in some UIs.
+    const hasPrompt = !!prompt;
+    composerCache = { ts: now, has: hasPrompt, prompt, send };
+    if (lastComposerHasState !== composerCache.has) lastComposerHasState = composerCache.has;
+    return composerCache;
+}
+
+function ensureControlsRemoved() {
+    const container = document.getElementById('safe-prompt-container');
+    if (container) {
+        container.remove();
+    }
 }
 
 // Sync state with Popup
@@ -83,7 +112,9 @@ async function saveVault() {
         lastSecuredPromptHash
     };
     return await new Promise((resolve) => {
-        chrome.storage.session.set({ [vaultKey]: payload }, () => resolve());
+        chrome.storage.session.set({ [vaultKey]: payload }, () => {
+            resolve();
+        });
     });
 }
 
@@ -325,15 +356,22 @@ function restore(text) {
 
 // --- 4. UI INJECTION ---
 function restoreResponsesAndMaybeWatermark({ addWatermark }) {
-    if (!Object.keys(tokenToReal).length) return;
+    if (!Object.keys(tokenToReal).length) return 0;
     const nodes = siteFindResponseNodes().filter(siteIsVisible);
     let any = 0;
     for (const n of nodes) {
         any += engineRestoreInDomSubtree(n, tokenToReal);
     }
-    if (addWatermark && any > 0 && nodes.length) {
-        engineEnsureWatermarkOnce(nodes[nodes.length - 1], { isPremium });
+    // Fallback: some sites change DOM wrappers and selector matches can miss visible response text.
+    // In that case, do a broader pass on document.body to restore tokens wherever they appear.
+    if (any === 0) {
+        any += engineRestoreInDomSubtree(document.body, tokenToReal);
     }
+    if (addWatermark && any > 0) {
+        const target = nodes.length ? nodes[nodes.length - 1] : document.body;
+        engineEnsureWatermarkOnce(target, { isPremium });
+    }
+    return any;
 }
 
 function detectPII(text) {
@@ -461,10 +499,16 @@ function findSendButton() {
 }
 
 function injectControls() {
+    const composer = getComposerSnapshot();
+    if (!composer.has) {
+        ensureControlsRemoved();
+        return;
+    }
     if (document.getElementById('safe-prompt-container')) return;
 
     const container = document.createElement('div');
     container.id = 'safe-prompt-container';
+    container.dataset.safepromptInjected = '1';
     Object.assign(container.style, {
         position: 'fixed', bottom: '20px', right: '20px', zIndex: '2147483647',
         display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px',
@@ -530,19 +574,23 @@ function injectControls() {
     const hideRevealBtn = () => { revealBtn.style.display = 'none'; };
 
     const doSecureSend = () => {
-        const promptEl = siteFindPromptElement({ debug: DEBUG, logDebug });
+        const snap = getComposerSnapshot();
+        const promptEl = snap.prompt;
         if (!promptEl) return alert('Could not find prompt input. Click the input box and try again.');
 
         const original = siteGetPromptText(promptEl);
         if (!original) return alert('Please type a prompt first!');
 
         const safe = sanitize(original);
-        siteSetPromptText(promptEl, safe);
+        const safeHasTokens = /\[\[SP_[A-Z0-9_]+\]\]/.test(safe);
+        const safeToSend = safeHasTokens ? `${TOKEN_PRESERVE_HINT}\n\n${safe}` : safe;
+        siteSetPromptText(promptEl, safeToSend);
         lastSecuredPromptHash = stableHash(siteGetPromptText(promptEl));
         saveVault();
 
         // Show reveal button only if we actually changed the text and have mappings
-        if (Object.keys(tokenToReal).length > 0 && safe !== original) showRevealBtn();
+        const revealShouldShow = Object.keys(tokenToReal).length > 0 && safe !== original;
+        if (revealShouldShow) showRevealBtn();
         else hideRevealBtn();
 
         if (actionBtnResetTimer) clearTimeout(actionBtnResetTimer);
@@ -565,9 +613,16 @@ function injectControls() {
 
     // Reveal Handler (same as restore, but explicit + hides itself after use)
     revealBtn.onclick = () => {
-        restoreResponsesAndMaybeWatermark({ addWatermark: true });
-        // Hide after use until next Secure Send
-        hideRevealBtn();
+        const promptEl = getComposerSnapshot().prompt;
+        const promptText = promptEl ? siteGetPromptText(promptEl) : '';
+        const hasPromptTokens = /\[\[SP_[A-Z0-9_]+\]\]/.test(promptText);
+        const responseNodes = siteFindResponseNodes().filter(siteIsVisible);
+        const responseNodesWithTokens = responseNodes.filter((n) => /\[\[SP_[A-Z0-9_]+\]\]/.test(n.textContent || '')).length;
+        const restored = restoreResponsesAndMaybeWatermark({ addWatermark: true });
+        // Hide only when we restored tokens in response nodes (actual LLM output reveal).
+        // If reveal only touched the prompt (pre-send), keep button visible for post-response reveal.
+        const shouldHideReveal = restored > 0 && responseNodesWithTokens > 0;
+        if (shouldHideReveal) hideRevealBtn();
     };
 
     container.appendChild(upgradeBtn);
@@ -611,7 +666,9 @@ function injectControls() {
         if (!txt) return false;
 
         const currentHash = stableHash(txt);
-        if (lastSecuredPromptHash && currentHash === lastSecuredPromptHash) return false;
+        if (lastSecuredPromptHash && currentHash === lastSecuredPromptHash) {
+            return false;
+        }
 
         const { detected, reasons } = detectPII(txt, { mode: 'warn' });
         if (!detected) return false;
@@ -651,7 +708,7 @@ function injectControls() {
 
     // Capture click on send button (site-specific + fallback)
     document.addEventListener('click', (e) => {
-        const sendBtn = siteFindSendButton();
+        const sendBtn = getComposerSnapshot().send;
         if (!sendBtn) return;
         const target = e.target;
         if (!(target instanceof Element)) return;
@@ -673,11 +730,13 @@ function injectControls() {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "ping") {
+        const composer = getComposerSnapshot();
         sendResponse({
             ok: true,
             isPremium,
             isProtectionActive,
             hasControls: !!document.getElementById('safe-prompt-container'),
+            hasComposer: !!composer.has,
             vaultKeys: Object.keys(tokenToReal).length
         });
         return;
@@ -697,6 +756,4 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-setInterval(injectControls, 1000);
-
-// After applying this code, remind me to run npm run build and refresh the extension.
+setInterval(injectControls, 1500);

@@ -2,6 +2,9 @@ import { detectNames } from './names.js'
 import { getOrCreateToken } from './tokens.js'
 import { PII_RULES } from './rules.js'
 
+const ANCHORED_ISRAELI_ID_REGEX =
+  /((?:ת["״]?\s*ז|תעודת\s*זהות|tz|teudat|zehut|israeli\s*id|id(?:\s*number)?))\s*[:#-]?\s*(\d{9})/gi
+
 function digitsOnly(s) {
   return String(s ?? '').replace(/\D+/g, '')
 }
@@ -99,6 +102,16 @@ export function sanitize(text, state, { protectionActive } = {}) {
     }
   }
 
+  // Israeli ID fallback in anchored contexts:
+  // even if checksum fails, if user explicitly labels the value as an ID we still tokenize it.
+  // This keeps Secure Send behavior practical for real-world messy input.
+  cleanText = cleanText.replace(ANCHORED_ISRAELI_ID_REGEX, (match, anchor, idDigits) => {
+    const tok = getOrCreateToken('ID', idDigits, state)
+    if (!tok) return match
+    itemsFound++
+    return match.replace(idDigits, tok)
+  })
+
   // Regex rules -> tokens
   for (const rule of PII_RULES) {
     cleanText = cleanText.replace(rule.regex, (match, ...args) => {
@@ -164,6 +177,8 @@ export function detectPII(text, { mode = 'warn' } = {}) {
   // Hebrew/English TZ anchors (avoid \\b with Hebrew + quote characters)
   const hasTzAnchor =
     /(?:^|[^A-Za-z0-9])(?:ת["״]?ז|tz|teudat|zehut|israeli\s*id|id\s*number)(?=$|[^A-Za-z0-9])/i.test(s)
+  const hasAnchoredIsraeliId = ANCHORED_ISRAELI_ID_REGEX.test(s)
+  ANCHORED_ISRAELI_ID_REGEX.lastIndex = 0
   const hasNegatedWallet = /\bnot\s+(?:a\s+)?wallet\b/i.test(s) || /\bnot\s+(?:an?\s+)?ethereum\b/i.test(s)
   const hasNegatedPostcode = /\bnot\s+(?:an?\s+)?(?:address|postcode|zip)\b/i.test(s) || /\bnot\s+an?\s+address\b/i.test(s)
   const hasNegatedDob = /\bnot\s+(?:a\s+)?dob\b/i.test(s) || /\bnot\s+birth\s+dates?\b/i.test(s) || /\bnot\s+date\s+of\s+birth\b/i.test(s)
@@ -190,8 +205,8 @@ export function detectPII(text, { mode = 'warn' } = {}) {
 
         // TZ (9 digits): require keyword anchor in warn mode.
         if (rule.type === 'ID' && rule.name.includes('Israeli ID')) {
-          if (!hasTzAnchor) continue
-          if (!hasAnyValidMatch(rule, isValidIsraeliId)) continue
+          if (!hasTzAnchor && !hasAnchoredIsraeliId) continue
+          if (!hasAnyValidMatch(rule, isValidIsraeliId) && !hasAnchoredIsraeliId) continue
           reasons.push(rule.name)
           typesSet.add(rule.type)
           continue

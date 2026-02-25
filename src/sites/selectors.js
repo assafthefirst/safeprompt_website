@@ -13,6 +13,7 @@ export function findPromptElement({ debug = false, logDebug = () => {} } = {}) {
     'gemini.google.com': ['div[contenteditable="true"][role="textbox"]', 'div[contenteditable="true"]', 'textarea'],
     'grok.com': ['textarea', 'div[contenteditable="true"][role="textbox"]', 'div[contenteditable="true"]'],
     'x.ai': ['textarea', 'div[contenteditable="true"][role="textbox"]', 'div[contenteditable="true"]'],
+    'copilot.microsoft.com': ['div[contenteditable="true"][role="textbox"]', 'div[contenteditable="true"]', 'textarea'],
   }
   const selectors =
     selectorsByHost[host] ?? ['textarea', 'div[contenteditable="true"][role="textbox"]', 'div[contenteditable="true"]']
@@ -89,9 +90,23 @@ export function findSendButton() {
   const selectorsByHost = {
     'chatgpt.com': ['button[data-testid="send-button"]', 'button[aria-label*="Send" i]'],
     'claude.ai': ['button[aria-label*="Send" i]', 'button[type="submit"]'],
-    'gemini.google.com': ['button[aria-label*="Send" i]', 'button[type="submit"]'],
+    // Gemini localizes aria-label, so include message/send hints across common locales.
+    'gemini.google.com': [
+      'button[aria-label*="Send" i]',
+      'button[aria-label*="Message" i]',
+      'button[aria-label*="שליחת הודעה"]',
+      'button[aria-label*="הודעה"]',
+      'button[aria-label*="Enviar" i]',
+      'button[aria-label*="Mensaje" i]',
+      'button[aria-label*="Envoyer" i]',
+      'button[aria-label*="message" i]',
+      'button[aria-label*="Senden" i]',
+      'button[aria-label*="Nachricht" i]',
+      'button[type="submit"]',
+    ],
     'grok.com': ['button[aria-label*="Send" i]', 'button[type="submit"]'],
     'x.ai': ['button[aria-label*="Send" i]', 'button[type="submit"]'],
+    'copilot.microsoft.com': ['button[aria-label*="Send" i]', 'button[type="submit"]'],
   }
   const selectors = selectorsByHost[host] ?? ['button[aria-label*="Send" i]', 'button[type="submit"]']
   for (const sel of selectors) {
@@ -109,6 +124,7 @@ export function findResponseNodes() {
     'gemini.google.com': ['.markdown', '.prose', '[role="article"]', '[data-message-id]'],
     'grok.com': ['.markdown', '.prose', '[role="article"]', '[data-message-id]'],
     'x.ai': ['.markdown', '.prose', '[role="article"]', '[data-message-id]'],
+    'copilot.microsoft.com': ['.markdown', '.prose', '[role="article"]', 'article'],
   }
   const selectors = selectorsByHost[host] ?? ['.markdown', '.prose', '[role="article"]', 'article']
   const nodes = []
@@ -116,3 +132,8 @@ export function findResponseNodes() {
   return nodes
 }
 
+export function hasComposer() {
+  const prompt = findPromptElement()
+  const send = findSendButton()
+  return !!(prompt && send)
+}

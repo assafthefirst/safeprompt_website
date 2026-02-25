@@ -9,6 +9,9 @@ export default defineConfig({
       input: {
         popup: 'index.html',
         report: 'report.html',
+        privacy: 'privacy.html',
+        terms: 'terms.html',
+        faq: 'faq.html',
       },
     },
   },

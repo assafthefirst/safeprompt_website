@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafePrompt — FAQ</title>
+    <link rel="stylesheet" href="report.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">
+          <img class="brandLogo" src="icons/icon48.png" alt="SafePrompt" />
+          <div>
+            <div class="brandName">SafePrompt</div>
+            <div class="brandSub">FAQ / How it works</div>
+          </div>
+        </div>
+      </header>
+
+      <main class="card">
+        <div class="cardTitle">Frequently asked questions</div>
+        <div class="cardHint">Quick answers for v1.</div>
+
+        <div class="details" open>
+          <summary>How does Secure Send work?</summary>
+          <ul>
+            <li>We replace detected PII with stable tokens (e.g., [[SP_EMAIL_1]]) before sending.</li>
+          </ul>
+        </div>
+
+        <div class="details">
+          <summary>How does Reveal Original Data work?</summary>
+          <ul>
+            <li>We restore tokens locally in your browser using the session vault.</li>
+          </ul>
+        </div>
+
+        <div class="details">
+          <summary>What happens on refresh?</summary>
+          <ul>
+            <li>Mappings persist for a limited time per tab (session vault TTL).</li>
+          </ul>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

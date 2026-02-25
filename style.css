@@ -17,5 +17,7 @@ header { display: flex; justify-content: space-between; align-items: center; mar
 .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
 input:checked + .slider { background-color: #10a37f; }
 input:checked + .slider:before { transform: translateX(14px); }
-footer { margin-top: 15px; text-align: center; font-size: 11px; color: #999; display: flex; justify-content: space-between; }
+footer { margin-top: 15px; text-align: center; font-size: 11px; color: #999; display: flex; justify-content: space-between; align-items: center; }
 footer a { color: #10a37f; text-decoration: none; }
+.footer-links { display: flex; align-items: center; gap: 6px; }
+.footer-links .sep { color: #c7c7c7; }
