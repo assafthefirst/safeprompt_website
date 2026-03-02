@@ -12,3 +12,10 @@ dist/
 coverage/
 
 backup/
+
+# Build ZIPs
+*.zip
+
+# Raw source images (not needed in repo)
+icons/*.jpeg
+icons/*.jpg

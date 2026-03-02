@@ -538,8 +538,9 @@ function injectControls() {
 
     // Main Action Button
     const actionBtn = document.createElement('button');
-    actionBtn.innerText = '🛡️ Secure Send';
-    const actionBtnDefaultText = actionBtn.innerText;
+    const logoUrl = chrome.runtime.getURL('icons/icon32.png');
+    actionBtn.innerHTML = `<img src="${logoUrl}" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:6px;border-radius:3px;"> Secure Send`;
+    const actionBtnDefaultText = actionBtn.innerHTML;
     let actionBtnResetTimer = null;
     Object.assign(actionBtn.style, {
         padding: '10px 20px', backgroundColor: '#10a37f', color: 'white',
@@ -594,9 +595,9 @@ function injectControls() {
         else hideRevealBtn();
 
         if (actionBtnResetTimer) clearTimeout(actionBtnResetTimer);
-        actionBtn.innerText = `Secured! ✨`;
+        actionBtn.innerHTML = `<img src="${logoUrl}" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:6px;border-radius:3px;"> Secured! ✨`;
         actionBtnResetTimer = setTimeout(() => {
-            actionBtn.innerText = actionBtnDefaultText;
+            actionBtn.innerHTML = actionBtnDefaultText;
             actionBtnResetTimer = null;
         }, 2000);
     };
@@ -650,7 +651,7 @@ function injectControls() {
             clearTimeout(actionBtnResetTimer);
             actionBtnResetTimer = null;
         }
-        actionBtn.innerText = actionBtnDefaultText;
+        actionBtn.innerHTML = actionBtnDefaultText;
     };
 
     const attachPromptListener = () => {

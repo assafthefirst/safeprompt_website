@@ -1,16 +1,13 @@
 import { buildGoogleFormPrefillUrl } from './reportFormPrefill.js'
 
-// 1) Put your Google Form URL here (viewform)
 const REPORT_FORM_URL =
-  'https://docs.google.com/forms/d/e/REPLACE_ME/viewform'
+  'https://docs.google.com/forms/d/e/1FAIpQLSfTtz2qdXQVAlXJmLpzmvZZVRSDueaAOkd_nW3SAJGVhTFy2A/viewform'
 
-// 2) Put your Google Form field entry IDs here (from the prefilled link: entry.<id>=...)
-// Example: if the URL contains `entry.1234567890=...`, the id is `1234567890`
 const REPORT_FORM_ENTRY_IDS = {
-  category: 'REPLACE_ME',
-  summary: 'REPLACE_ME',
-  steps: 'REPLACE_ME',
-  diagnostics: 'REPLACE_ME',
+  category: '1041758971',
+  summary: '1402218764',
+  steps: '543110351',
+  diagnostics: '1673632342',
 }
 
 function el(id) {
