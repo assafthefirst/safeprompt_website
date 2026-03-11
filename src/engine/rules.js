@@ -29,7 +29,15 @@ export const PII_RULES = [
   },
 
   // Bank
+  // Standard IBAN (no spaces/hyphens)
   { name: 'IBAN (EU Bank)', type: 'IBAN', regex: /\b[A-Z]{2}\d{2}[A-Z0-9]{4,30}\b/g },
+  // Keyword-anchored IBAN with hyphens/spaces (DEMO-IBAN-DE-7721-4419-8800)
+  // IBAN_ANCHOR type bypasses isValidIBAN since keyword confirms intent
+  {
+    name: 'IBAN (keyword anchored, hyphenated)',
+    type: 'IBAN_ANCHOR',
+    regex: /\bIBAN\s*[:\-]?\s*[A-Z]{2}[\s\-]?\d{2}(?:[\s\-]?[A-Z0-9]{1,8}){1,8}\b/gi,
+  },
 
   // Network / device identifiers (high-signal)
   { name: 'Ethereum Wallet Address', type: 'WALLET', regex: /\b0x[a-fA-F0-9]{40}\b/g },
@@ -162,6 +170,32 @@ export const PII_RULES = [
     regex: /\b(?:BSN|burgerservicenummer|burger\s*service\s*nummer|dutch\s*(?:citizen\s*)?(?:number|id)|sofi\s*nummer)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*\d{9}\b/gi,
   },
 
+  // --- Brazil ---
+  // CPF: 000.000.000-00 or 00000000000
+  {
+    name: 'Brazilian CPF',
+    type: 'NATID',
+    regex: /\b(?:CPF|cadastro\s*(?:de\s*)?pessoa\s*f[íi]sica)\s*[:\-]?\s*\d{3}\.?\d{3}\.?\d{3}[-.]?\d{2}\b/gi,
+  },
+  // CPF structural (keyword-less, with dots/dash separators only)
+  {
+    name: 'Brazilian CPF (structural)',
+    type: 'NATID',
+    regex: /\b\d{3}\.\d{3}\.\d{3}-\d{2}\b/g,
+  },
+  // CNPJ: 00.000.000/0000-00
+  {
+    name: 'Brazilian CNPJ',
+    type: 'NATID',
+    regex: /\b(?:CNPJ|cadastro\s*nacional\s*(?:de\s*)?pessoa\s*jur[íi]dica)?\s*\d{2}\.?\d{3}\.?\d{3}\/?\.?\d{4}[-.]?\d{2}\b/gi,
+  },
+  // Brazilian RG (identity, keyword anchored)
+  {
+    name: 'Brazilian RG (keyword anchored)',
+    type: 'NATID',
+    regex: /\b(?:RG|registro\s*geral|identidade)\s*[:\-]?\s*\d{1,2}\.?\d{3}\.?\d{3}[-]?\d{1}\b/gi,
+  },
+
   // --- USA additional ---
   {
     name: 'VIN (keyword anchored)',
@@ -240,7 +274,21 @@ export const PII_RULES = [
   { name: 'Israeli Phone', type: 'PHONE', regex: /\b(05[0-9]-?[0-9]{7})\b/g },
 
   // Phones
-  { name: 'US/Intl Phone', type: 'PHONE', regex: /\b\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b/g },
+  // US/Canada: +1 (optional), then 10 digits
+  { name: 'US/Canada Phone', type: 'PHONE', regex: /\b\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b/g },
+  // International phones with country code: +CC followed by 6-14 digits with separators
+  // Covers EU (+49, +33, +44, +34, +39, +31, +32, +48, etc.) and Brazil (+55)
+  {
+    name: 'International Phone (with country code)',
+    type: 'PHONE',
+    regex: /\+(?:49|33|44|34|39|31|32|48|351|353|358|45|46|47|41|43|30|36|420|421|55|52|54|56|57|58|51)\s?[\s.\-]?\(?\d{1,4}\)?[\s.\-]?\d{2,5}[\s.\-]?\d{2,9}\b/g,
+  },
+  // Brazilian phone: (XX) 9XXXX-XXXX or (XX) XXXX-XXXX
+  {
+    name: 'Brazilian Phone',
+    type: 'PHONE',
+    regex: /(?:\(\d{2}\)|\b\d{2})\s*(?:9\d{4}|\d{4})[-\s]?\d{4}\b/g,
+  },
 
   // Health Insurance Member ID (keyword anchored, e.g. HIX-784392651, HIN-123456)
   {
@@ -261,20 +309,27 @@ export const PII_RULES = [
     type: 'ADDRESS',
     regex: /\b\d{1,5}\s+[A-Za-z]+(?:\s+[A-Za-z]+){0,3}\s+(?:Street|St\.?|Avenue|Ave\.?|Boulevard|Blvd\.?|Drive|Dr\.?|Lane|Ln\.?|Road|Rd\.?|Way|Court|Ct\.?|Place|Pl\.?|Circle|Cir\.?|Trail|Trl\.?|Terrace|Ter\.?|Parkway|Pkwy\.?)[,.]?\s*[A-Za-z]+(?:\s+[A-Za-z]+){0,2}[,.]?\s+[A-Z]{2}\s+\d{5}(?:-\d{4})?\b/g,
   },
-  // Keyword-anchored address (e.g. "home address: 123 Main St ...")
+  // Keyword-anchored address (supports non-ASCII street names: ß, ä, ö, ü, é, à, etc.)
   {
     name: 'Address (keyword anchored)',
     type: 'ADDRESS',
     captureGroup: 1,
-    regex: /\b(?:home\s*address|mailing\s*address|street\s*address|residential\s*address|address)\s*[:\-]\s*(\d{1,5}\s+[A-Za-z][\w\s,.]+(?:\d{5}(?:-\d{4})?))\b/gi,
+    regex: /\b(?:home\s*address|mailing\s*address|street\s*address|residential\s*address|address)\s*[:\-]\s*(\d{1,5}[\s\S]{3,120}?(?:\d{4,6}[\s\S]{0,30}?(?:Germany|Deutschland|France|España|Spain|Italy|Italia|Netherlands|Belgium|Portugal|Brazil|Brasil|UK|USA|United States|United Kingdom)[^.!?\n]*|\d{5}(?:-\d{4})?))/gi,
+  },
+  // EU Address (keyword anchored, handles umlauts, accented chars, zip+city patterns)
+  {
+    name: 'EU/Intl Address (keyword anchored)',
+    type: 'ADDRESS',
+    regex: /\b(?:home\s*address|mailing\s*address|street\s*address|residential\s*address|wohn(?:ort|adresse)|adresse|dirección|indirizzo|endereço)\s*[:\-]\s*\d{1,5}[^\n.!?]{5,100}?\d{4,6}[^\n.!?]{0,50}/gi,
   },
 
   // Passport (general) - keyword anchored to reduce collisions with random alphanumerics
+  // Supports: AB1234567, FAKEP-DE-93821, P-123456789 (hyphenated/prefixed formats)
   {
     name: 'Passport (General) (keyword anchored)',
     type: 'PASSPORT',
     captureGroup: 1,
-    regex: /\b(?:passport|pass)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*([A-Z]{1,2}\d{6,9})\b/gi,
+    regex: /\b(?:passport|pass(?:port)?)\s*(?:number|no\.?|#|id)?\s*[:\-]?\s*([A-Z]{1,6}(?:[-]?[A-Z]{0,3}[-]?)?\d{4,9})\b/gi,
   },
   {
     name: 'US Passport Number (keyword anchored)',
