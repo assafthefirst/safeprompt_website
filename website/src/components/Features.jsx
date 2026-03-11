@@ -30,7 +30,7 @@ const features = [
   {
     icon: Zap,
     title: 'Zero Latency',
-    description: 'Everything happens instantly in your browser.',
+    description: 'Everything happens instantly in your browser, no data collected by anyone.',
   },
 ];
 
