@@ -3,8 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SafePrompt — Terms</title>
+    <title>SafePrompt — Terms & Conditions</title>
     <link rel="stylesheet" href="report.css" />
+    <style>
+      .legal-body { font-size: 14px; line-height: 1.75; color: #374151; }
+      .legal-body h2 { font-size: 15px; font-weight: 700; color: #111827; margin: 20px 0 6px; }
+      .legal-body p { margin: 0 0 10px; }
+      .legal-body ul { margin: 6px 0 12px 20px; padding: 0; }
+      .legal-body ul li { margin-bottom: 6px; }
+      .legal-body strong { color: #111827; }
+      .legal-updated { font-size: 12px; color: #9ca3af; margin-bottom: 18px; }
+    </style>
   </head>
   <body>
     <div class="page">
@@ -13,28 +22,44 @@
           <img class="brandLogo" src="icons/icon48.png" alt="SafePrompt" />
           <div>
             <div class="brandName">SafePrompt</div>
-            <div class="brandSub">Terms & Conditions</div>
+            <div class="brandSub">Terms &amp; Conditions</div>
           </div>
         </div>
       </header>
 
       <main class="card">
-        <div class="cardTitle">Terms (v1)</div>
-        <div class="cardHint">This is a short summary. Replace with your legal text.</div>
+        <div class="cardTitle">Terms &amp; Conditions</div>
+        <p class="legal-updated">Last updated: March 2026</p>
 
-        <div class="details" open>
-          <summary>Usage</summary>
-          <ul>
-            <li>You are responsible for the content you send to LLMs.</li>
-            <li>SafePrompt helps anonymize PII but is not a legal guarantee.</li>
-          </ul>
-        </div>
+        <div class="legal-body">
 
-        <div class="details">
-          <summary>Liability</summary>
+          <h2>1. Acceptance of Terms</h2>
+          <p>By installing and using the SafePrompt Chrome Extension ("the Extension"), you agree to be bound by these Terms. If you do not agree, please uninstall the Extension immediately.</p>
+
+          <h2>2. Nature of the Service</h2>
+          <p>SafePrompt is a privacy tool designed to detect and mask sensitive information (such as names, emails, and phone numbers) within your browser before it is transmitted to third-party Large Language Models (LLMs) like ChatGPT, Gemini, or Claude.</p>
+
+          <h2>3. User Responsibilities</h2>
           <ul>
-            <li>Use at your own risk. SafePrompt provides best-effort protection.</li>
+            <li><strong>Final Review:</strong> You acknowledge that automated PII detection is not 100% foolproof. You remain solely responsible for the content you submit to any AI service. You should always perform a final manual check of your prompt before hitting "send."</li>
+            <li><strong>Lawful Use:</strong> You agree not to use SafePrompt for any illegal purposes or to circumvent the safety filters of the underlying AI providers.</li>
           </ul>
+
+          <h2>4. Privacy &amp; Data Handling</h2>
+          <ul>
+            <li><strong>Local Processing:</strong> SafePrompt is designed to process text locally within your browser. We do not store, transmit, or sell your prompt data to our own servers.</li>
+            <li><strong>Third-Party AI:</strong> Once you submit a prompt (after masking), that data is subject to the privacy policy and terms of the specific AI provider (e.g., OpenAI, Google, Anthropic). SafePrompt is not responsible for how those third parties handle your data.</li>
+          </ul>
+
+          <h2>5. No Warranty &amp; Limitation of Liability</h2>
+          <ul>
+            <li><strong>"As-Is" Basis:</strong> The Extension is provided "as-is" without any warranties of any kind. We do not guarantee that the Extension will catch 100% of sensitive data or that it will be compatible with all future updates of third-party AI websites.</li>
+            <li><strong>Limitation of Liability:</strong> To the maximum extent permitted by law, SafePrompt and its developers shall not be liable for any data leaks, compliance violations (such as GDPR or HIPAA), or damages resulting from your use of the tool.</li>
+          </ul>
+
+          <h2>6. Updates to Terms</h2>
+          <p>We may update these terms to reflect changes in the Extension or legal requirements. Continued use after an update constitutes acceptance of the new terms.</p>
+
         </div>
       </main>
     </div>

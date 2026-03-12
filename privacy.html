@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SafePrompt — Privacy Policy</title>
     <link rel="stylesheet" href="report.css" />
+    <style>
+      .legal-body { font-size: 14px; line-height: 1.75; color: #374151; }
+      .legal-body h2 { font-size: 15px; font-weight: 700; color: #111827; margin: 20px 0 6px; }
+      .legal-body p { margin: 0 0 10px; }
+      .legal-body ul { margin: 6px 0 12px 20px; padding: 0; }
+      .legal-body ul li { margin-bottom: 6px; }
+      .legal-body strong { color: #111827; }
+      .legal-updated { font-size: 12px; color: #9ca3af; margin-bottom: 18px; }
+    </style>
   </head>
   <body>
     <div class="page">
@@ -19,30 +28,37 @@
       </header>
 
       <main class="card">
-        <div class="cardTitle">Privacy at a glance</div>
-        <div class="cardHint">Short, clear, and local-first.</div>
+        <div class="cardTitle">Privacy Policy</div>
+        <p class="legal-updated">Last updated: March 2026</p>
 
-        <div class="details" open>
-          <summary>What we store</summary>
-          <ul>
-            <li>Local token mappings in the browser session vault (temporary).</li>
-            <li>No prompts/responses are sent to our servers by default.</li>
-          </ul>
-        </div>
+        <div class="legal-body">
 
-        <div class="details">
-          <summary>What we do not collect</summary>
-          <ul>
-            <li>No prompt or response content is transmitted to SafePrompt servers.</li>
-            <li>No token-to-real mapping is uploaded.</li>
-          </ul>
-        </div>
+          <h2>1. Our Privacy Philosophy</h2>
+          <p>SafePrompt is built on a "Privacy-by-Design" principle. We believe your data belongs to you. Our extension is a local tool that acts as a filter, not a data collection agency.</p>
 
-        <div class="details">
-          <summary>Support diagnostics</summary>
+          <h2>2. Information We Handle (Local Only)</h2>
           <ul>
-            <li>Optional, user-initiated diagnostics only (counts and metadata).</li>
+            <li><strong>Token Mappings:</strong> To allow you to see your original data after the AI responds, SafePrompt stores temporary "mappings" (e.g., <code>[NAME_1] = John Doe</code>) in your browser's Session Vault.</li>
+            <li><strong>Data Persistence:</strong> This information is stored locally on your device and is automatically cleared when you close your browser session. It is never transmitted to us.</li>
           </ul>
+
+          <h2>3. What We Do NOT Collect</h2>
+          <ul>
+            <li><strong>No Prompt/Response Storage:</strong> We do not see, read, or store the content of your prompts or the AI's responses.</li>
+            <li><strong>No Remote Transmission:</strong> No data entered into the extension is ever sent to SafePrompt servers. Your text moves directly from your browser to the AI provider (e.g., OpenAI) only after the masking process is complete.</li>
+            <li><strong>No Personal Profiling:</strong> We do not track your identity, browsing history, or AI usage patterns.</li>
+          </ul>
+
+          <h2>4. Optional Support Diagnostics</h2>
+          <p>If you encounter a bug, you may manually choose to send a diagnostic report to help us improve.</p>
+          <ul>
+            <li><strong>What it includes:</strong> Metadata only (e.g., version number, browser type, and basic error codes).</li>
+            <li><strong>What it excludes:</strong> Never includes your actual prompts or sensitive PII.</li>
+          </ul>
+
+          <h2>5. Third-Party AI Services</h2>
+          <p>SafePrompt functions as a layer on top of third-party AI services. Please note that while we mask your data, the final (masked) prompt you send is subject to the privacy policies of the AI provider you are using (ChatGPT, Claude, Gemini, etc.).</p>
+
         </div>
       </main>
     </div>
