@@ -150,7 +150,7 @@ export function detectPII(text, { mode = 'warn' } = {}) {
   const hasDigits = /\d/.test(s)
   const hasAt = s.includes('@')
   const hasColon = s.includes(':')
-  const hasPIIKeywords = /\b(iban|swift|bic|passport|cvv|cvc|routing|aba|ach|account|acct|eori|vat|nino|nhs|utr|postcode|ip|ipv6|mac|key|token|ssn|ein|credit\s*card|card\s*number|insurance|member\s*id|policy|driver|licen[cs]e|address|street|avenue|drive|boulevard|vin|vehicle|dea|medicare|mbi|plate|nir|s[ée]curit[ée]|dni|nie|codice\s*fiscale|partita|bsn|rijksregister|national\s*id|citizen\s*id|tax\s*id|tin|itin|fiscal|dvla|carte\s*d|cpf|cnpj|cadastro|rg|registro|wohnadresse|adresse|direcci[oó]n|indirizzo|endere[cç]o)\b/i.test(s)
+  const hasPIIKeywords = /\b(iban|swift|bic|passport|cvv|cvc|routing|aba|ach|account|acct|eori|vat|nino|nhs|utr|postcode|ip|ipv6|mac|key|token|ssn|ein|credit\s*card|card\s*number|insurance|member\s*id|policy|driver|licen[cs]e|address|street|avenue|drive|boulevard|vin|vehicle|dea|medicare|mbi|plate|nir|s[ée]curit[ée]|dni|nie|codice\s*fiscale|partita|bsn|rijksregister|national\s*id|citizen\s*id|tax\s*id|tin|itin|fiscal|dvla|carte\s*d|cpf|cnpj|cadastro|rg|registro|wohnadresse|adresse|direcci[oó]n|indirizzo|endere[cç]o|steuernummer|steuer-?id|sozialversicherung|personalausweis|reisepass|krankenversichert|kvnr|f[üu]hrerschein|kennzeichen|kfz|betriebsnummer|kindergeldnummer|kundennummer|aktenzeichen|gl[äa]ubiger|b[üu]rger-?id|kreditkarte)\b/i.test(s)
 
   const names = detectNames(s)
   // Conservative: only treat names as PII signal for warnings if they look like a full name.

@@ -545,7 +545,8 @@ function injectControls() {
     Object.assign(actionBtn.style, {
         padding: '10px 20px', backgroundColor: '#10a37f', color: 'white',
         border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold',
-        fontSize: '14px', boxShadow: '0 4px 6px rgba(0,0,0,0.2)', transition: 'background 0.2s'
+        fontSize: '14px', boxShadow: '0 4px 6px rgba(0,0,0,0.2)', transition: 'background 0.2s',
+        display: 'flex', alignItems: 'center', justifyContent: 'center'
     });
     
     actionBtn.onmouseover = () => actionBtn.style.backgroundColor = '#0e8e6d';

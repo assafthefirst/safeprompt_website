@@ -93,19 +93,51 @@ export const PII_RULES = [
   // Germany (DE) identifiers
   { name: 'DE VAT ID (USt-IdNr)', type: 'VAT', regex: /\bDE\s?\d{9}\b/gi },
   {
+    // Steuer-ID: 11 digits (spaced or not) and Steuernummer: XX/XXX/XXXXX or XX/XXX/XXXXXX
     name: 'DE Steuer-ID (keyword anchored)',
     type: 'TAXID',
-    regex: /\b(?:Steuer(?:-?ID|identifikationsnummer)|IdNr\.?)\s*[:\-]?\s*\d(?:\s?\d){10}\b/gi,
+    regex: /\b(?:Steuer(?:-?ID|identifikationsnummer|nummer)|Steuernr\.?|IdNr\.?)\s*[:\-]?\s*(?:\d{2}[\/\s]\d{3}[\/\s]\d{4,5}|\d(?:\s?\d){10})\b/gi,
+  },
+  {
+    // Sozialversicherungsnummer: e.g. 15 070585 M 102 (digits + letter + digits)
+    name: 'DE Sozialversicherungsnummer (keyword anchored)',
+    type: 'RVNR',
+    regex: /\b(?:Sozialversicherungsnummer|Sozialversicherung|RVNR|Rentenversicherungsnummer|RV-Nummer)\s*[:\-]?\s*\d{2}\s?\d{6}\s?[A-Z]\s?\d{3}\b/gi,
   },
   {
     name: 'DE Personalausweis/Reisepass (keyword anchored)',
     type: 'PASSPORT',
-    regex: /\b(?:Personalausweis|Ausweisnummer|Reisepass(?:nummer)?|Passnummer|Pass-?Nr\.?)\s*[:\-]?\s*[A-Z0-9]{8,12}\b/gi,
+    // Handle "Personalausweisnummer:" (with "nummer" suffix in keyword)
+    regex: /\b(?:Personalausweis(?:nummer)?|Ausweisnummer|Reisepass(?:nummer)?|Passnummer|Pass-?Nr\.?)\s*[:\-]?\s*[A-Z0-9]{8,12}\b/gi,
   },
   {
     name: 'DE Health Insurance (KVNR) (keyword anchored)',
     type: 'INSURANCE',
-    regex: /\b(?:KVNR|Krankenversichertennummer|Versichertennummer)\s*[:\-]?\s*[A-Z]\d{9}\b/gi,
+    regex: /\b(?:KVNR|Krankenversichertennummer|Krankenversicherten(?:nummer)?|Versichertennummer)\s*[:\-]?\s*[A-Z]\d{9}\b/gi,
+  },
+  {
+    // Bürger-Identifikationsnummer (11 digits, spaced or not)
+    name: 'DE Bürger-ID (keyword anchored)',
+    type: 'NATID',
+    regex: /\b(?:B[üu]rger-?(?:Identifikations)?(?:nummer|ID|nr\.?)|citizen\s*ID)\s*[:\-]?\s*\d(?:\s?\d){10}\b/gi,
+  },
+  {
+    // SEPA Gläubiger-Identifikationsnummer: DExx ZZZ xxxxxxxxxx
+    name: 'DE SEPA Creditor ID (keyword anchored)',
+    type: 'DE_SEPA',
+    regex: /\b(?:Gl[äa]ubiger-?(?:Identifikations)?(?:nummer|ID|nr\.?)|SEPA\s*(?:creditor|Gl[äa]ubiger))\s*[:\-]?\s*[A-Z]{2}\d{2}[A-Z0-9]{3}\d{10,12}\b/gi,
+  },
+  {
+    // Betriebsnummer: 8-digit employer ID
+    name: 'DE Betriebsnummer (keyword anchored)',
+    type: 'DE_BNR',
+    regex: /\b(?:Betriebsnummer|BNR|Betriebsnr\.?)\s*[:\-]?\s*\d{8}\b/gi,
+  },
+  {
+    // KFZ-Kennzeichen: German license plate e.g. B-MW 2026, M-AB 1234
+    name: 'DE KFZ-Kennzeichen (keyword anchored)',
+    type: 'PLATE',
+    regex: /\b(?:KFZ-?Kennzeichen|Kennzeichen|Nummernschild|Fahrzeugkennzeichen)\s*[:\-]?\s*[A-ZÄÖÜ]{1,3}\s*[-–]\s*[A-Z]{1,2}\s+\d{1,4}[HE]?\b/gi,
   },
   {
     name: 'DE Address (street + house + PLZ)',
@@ -116,6 +148,24 @@ export const PII_RULES = [
     name: 'DE Handelsregister (HRB/HRA) (keyword anchored)',
     type: 'DE_REG',
     regex: /\b(?:handelsregister|hrb|hra)\s*(?:nr\.?|number|no\.?|#|id)?\s*[:\-]?\s*(?:hrb|hra)?\s*\d{1,6}\b/gi,
+  },
+  {
+    // Kindergeldnummer: e.g. 115FK12345
+    name: 'DE Kindergeldnummer (keyword anchored)',
+    type: 'DE_KG',
+    regex: /\b(?:Kindergeldnummer|Kindergeld(?:nr\.?|ID))\s*[:\-]?\s*\d{3}[A-Z]{2}\d{5}\b/gi,
+  },
+  {
+    // Führerscheinnummer: e.g. B071 ABCDE 12 (German format)
+    name: 'DE Führerschein (keyword anchored)',
+    type: 'DL',
+    regex: /\b(?:F[üu]hrerschein(?:nummer)?|F[üu]hrerscheinnr\.?)\s*[:\-]?\s*[A-Z0-9]{1,5}\s+[A-Z0-9]{3,8}\s+\d{2}\b/gi,
+  },
+  {
+    // Kundennummer / Aktenzeichen (generic German reference IDs)
+    name: 'DE Kundennummer / Aktenzeichen (keyword anchored)',
+    type: 'CASEID',
+    regex: /\b(?:Kundennummer|Kundennr\.?|Aktenzeichen|Vorgangsnummer|Referenznummer|Auftragsnummer)\s*[:\-]?\s*[A-Z0-9][A-Z0-9\-_\/]{3,}\b/gi,
   },
 
   // --- France ---
@@ -243,7 +293,7 @@ export const PII_RULES = [
   {
     name: 'Credit Card (keyword anchored)',
     type: 'CC_ANCHOR',
-    regex: /\b(?:credit\s*card|card\s*number|card\s*no\.?|card\s*#|cc\s*(?:number|no\.?|#)?)\s*[:\-]?\s*(\d(?:[\s-]*\d){12,18})\b/gi,
+    regex: /\b(?:credit\s*card|card\s*number|card\s*no\.?|card\s*#|cc\s*(?:number|no\.?|#)?|Kreditkartennummer|Kreditkarte)\s*[:\-]?\s*(\d(?:[\s-]*\d){12,18})\b/gi,
     captureGroup: 1,
   },
   { name: 'Credit Card', type: 'CC', regex: /\b(?:\d[ -]*?){13,19}\b/g },
