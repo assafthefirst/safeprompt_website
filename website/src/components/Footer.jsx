@@ -29,7 +29,7 @@ export default function Footer() {
             <ExternalLink className="h-4 w-4" aria-hidden />
           </a>
           <a
-            href="/privacy.html"
+            href="/safeprompt_website/privacy.html"
             className="text-sm font-medium text-slate-700 hover:text-slate-900"
           >
             Privacy Policy
