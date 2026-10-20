@@ -2,13 +2,486 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/safeprompt_website/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SafePrompt — AI Privacy & Anonymizer for ChatGPT</title>
-    <script type="module" crossorigin src="/safeprompt_website/assets/index-CaHdwTES.js"></script>
-    <link rel="stylesheet" crossorigin href="/safeprompt_website/assets/index-Bhfyuv1A.css">
+    <title>SafePrompt: AI privacy for ChatGPT, Claude &amp; Gemini</title>
+    <meta name="description" content="SafePrompt is a free Chrome extension that masks names, emails, phone numbers, IDs and card numbers before you send a prompt to ChatGPT, Claude, Gemini, Grok, Copilot or DeepSeek. Everything runs in your browser." />
+    <meta name="theme-color" content="#0A1628" />
+    <link rel="icon" type="image/svg+xml" href="/safeprompt_website/mark.svg" />
+    <link rel="alternate icon" type="image/png" href="/safeprompt_website/logo.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="SafePrompt: use AI, keep your secrets" />
+    <meta property="og:description" content="Mask personal and business data before it reaches ChatGPT, Claude or Gemini. Reveal it again on your screen. Nothing leaves your browser." />
+    <meta property="og:image" content="https://assafthefirst.github.io/safeprompt_website/media/poster.jpg" />
+    <meta property="og:url" content="https://assafthefirst.github.io/safeprompt_website/" />
+    <link rel="canonical" href="https://assafthefirst.github.io/safeprompt_website/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
-    <div id="root"></div>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- ============ NAV ============ -->
+    <header class="nav" id="top">
+      <div class="wrap nav__inner">
+        <a class="brand" href="#top" aria-label="SafePrompt home">
+          <img src="/safeprompt_website/mark.svg" alt="" width="32" height="32" />
+          <span>SafePrompt</span>
+        </a>
+        <nav class="nav__links" aria-label="Main">
+          <a href="#how">How it works</a>
+          <a href="#try">Try it</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a class="btn btn--primary btn--sm js-install" href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          Add to Chrome
+        </a>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ============ HERO ============ -->
+      <section class="hero">
+        <div class="wrap hero__grid">
+          <div class="hero__copy">
+            <p class="pill">
+              <span class="pill__dot" aria-hidden="true"></span>
+              Chrome extension for AI chats
+            </p>
+            <h1 class="hero__title">Use AI.<br />Keep your secrets.</h1>
+            <p class="hero__lede">
+              SafePrompt catches names, emails, phone numbers, IDs and card numbers before you hit Send,
+              and swaps them for placeholders. You still get a useful answer, and your real details
+              never leave your browser.
+            </p>
+            <div class="hero__ctas">
+              <a class="btn btn--primary btn--lg js-install" href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">
+                <svg class="ico ico--chrome" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="3.6"/><path d="M12 8.4h8.6M8.9 13.8 4.6 6.3M15.1 13.8l-4.3 7.6"/></svg>
+                Add to Chrome, it's free
+              </a>
+              <a class="btn btn--ghost btn--lg" href="#watch">
+                <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"/></svg>
+                Watch the 45-second tour
+              </a>
+            </div>
+            <ul class="trust">
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 9.5 4-1.2 7-5 7-9.5V6z"/></svg>Runs only in your browser</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.2-3.6 3.8-5.5 7-5.5s5.8 1.9 7 5.5M4 4l16 16"/></svg>No account, no tracking</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Free to start</li>
+            </ul>
+          </div>
+
+          <!-- Animated product mock -->
+          <div class="hero__demo" aria-label="Animation: SafePrompt warns about sensitive data and replaces it with placeholders">
+            <div class="window window--hero">
+              <div class="window__bar">
+                <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="window__url">your-ai-assistant.com</span>
+                <span class="window__ext"><img src="/safeprompt_website/mark.svg" alt="" width="14" height="14" />SafePrompt on</span>
+              </div>
+              <div class="window__body hero-mock" id="heroMock" data-stage="0">
+                <div class="hero-mock__chat">
+                  <div class="hero-mock__label">AI Assistant</div>
+                  <div class="hero-mock__bubble" aria-hidden="true">Summarize the Q3 board notes</div>
+                  <div class="hero-mock__answer" aria-hidden="true"><i></i><div class="hero-mock__lines"><span></span><span></span><span></span></div></div>
+                </div>
+                <div class="hero-mock__modal" role="presentation">
+                  <strong>Sensitive data detected</strong>
+                  <p>Secure &amp; send replaces it with placeholders before sending.</p>
+                  <div class="chips">
+                    <span class="chip chip--warn">Name</span>
+                    <span class="chip chip--warn">Email</span>
+                    <span class="chip chip--warn">Phone number</span>
+                    <span class="chip chip--warn">ID</span>
+                  </div>
+                  <div class="hero-mock__modal-actions">
+                    <span class="fakebtn fakebtn--plain">Send anyway</span>
+                    <span class="fakebtn fakebtn--green">Secure &amp; send</span>
+                  </div>
+                </div>
+                <div class="hero-mock__composer">
+                  <p class="hero-mock__text" id="heroText" aria-hidden="true"></p>
+                  <span class="hero-mock__send" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>
+                  </span>
+                </div>
+                <span class="hero-mock__secure" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 9.5 4-1.2 7-5 7-9.5V6z"/></svg>
+                  <span class="js-secure-label">Secure Send</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wrap works">
+          <p class="works__label">Works on</p>
+          <ul class="works__list">
+            <li>ChatGPT</li><li>Claude</li><li>Gemini</li><li>Grok</li><li>Copilot</li><li>DeepSeek</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ PROBLEM + PROOF ============ -->
+      <section class="section section--problem">
+        <div class="wrap">
+          <div class="problem">
+            <h2 class="problem__title">Once you hit Send, it's out of your hands.</h2>
+            <div class="problem__points">
+              <p><strong>It can be kept.</strong> Whatever you paste into an AI chat can be stored, reviewed by people, or used to train future models.</p>
+              <p><strong>It's not just lawyers.</strong> "Email this to…", "my phone is…", "here's my ID…" Everyday prompts leak data just as easily.</p>
+              <p><strong>At work it's someone else's data.</strong> One pasted contract, payroll line or patient note exposes a client or colleague, not only you.</p>
+            </div>
+          </div>
+          <div class="proof">
+            <div class="proof__item"><span class="proof__num">3.8</span><p>pastes of sensitive company data per day, on average, by employees who paste into AI tools</p></div>
+            <div class="proof__item"><span class="proof__num">~40%</span><p>of files uploaded to AI tools contain personal or payment card data</p></div>
+            <div class="proof__item"><span class="proof__num">72%</span><p>of AI use at work happens on personal accounts, outside company controls</p></div>
+          </div>
+          <p class="proof__src">Source: LayerX, <a href="https://www.techrepublic.com/article/news-employees-share-company-secrets-on-chatgpt/" target="_blank" rel="noopener">Enterprise AI and SaaS Data Security Report 2025</a>.</p>
+        </div>
+      </section>
+
+      <!-- ============ VIDEO ============ -->
+      <section class="section section--video" id="watch">
+        <div class="wrap">
+          <div class="section__head section__head--center">
+            <h2>See it work in 45 seconds</h2>
+            <p>A warning before you send, placeholders on the way out, your real details back on your screen.</p>
+          </div>
+          <div class="video" id="tour" data-youtube="efGqp3e93Hw">
+            <img class="video__poster" src="/safeprompt_website/media/poster.jpg" alt="" loading="lazy" width="1920" height="1080" />
+            <button class="video__play" id="tourPlay" type="button" aria-label="Play the SafePrompt overview video">
+              <span class="video__play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+              <span class="video__play-text">Play with sound <span>0:48</span></span>
+            </button>
+          </div>
+          <p class="video__alt"><a href="https://www.youtube.com/watch?v=efGqp3e93Hw" target="_blank" rel="noopener">Watch on YouTube</a></p>
+        </div>
+      </section>
+
+      <!-- ============ HOW IT WORKS ============ -->
+      <section class="section" id="how">
+        <div class="wrap">
+          <div class="section__head">
+            <h2>How it works</h2>
+            <p>SafePrompt sits on the chat page you already use. You keep typing the way you do now.</p>
+          </div>
+
+          <ol class="steps">
+            <li class="step">
+              <div class="step__copy">
+                <span class="step__num">1</span>
+                <h3>It warns you before you send</h3>
+                <p>Press Enter or Send as usual. If SafePrompt spots sensitive data, it lists what it found and lets you choose: <b>Secure &amp; send</b>, <b>Send anyway</b>, or go back and edit.</p>
+              </div>
+              <div class="step__visual">
+                <div class="mock mock--dim">
+                  <div class="mock-modal">
+                    <div class="mock-modal__head"><strong>Sensitive data detected</strong><span aria-hidden="true">×</span></div>
+                    <p>This message contains sensitive data. Secure &amp; send replaces it with placeholders before sending.</p>
+                    <div class="chips"><span class="chip chip--warn">Name</span><span class="chip chip--warn">Email</span><span class="chip chip--warn">Phone number</span><span class="chip chip--warn">ID</span></div>
+                    <div class="mock-modal__actions"><span class="fakebtn fakebtn--plain">Send anyway</span><span class="fakebtn fakebtn--green">Secure &amp; send</span></div>
+                  </div>
+                  <div class="mock-input">Write a follow-up email to <mark>Jane Cohen</mark> (<mark>jane.cohen@acme.com</mark>, <mark>054-381-2297</mark>) about invoice #4471 for client ID <mark>3049-7731</mark>.</div>
+                </div>
+              </div>
+            </li>
+
+            <li class="step">
+              <div class="step__copy">
+                <span class="step__num">2</span>
+                <h3>Your data becomes placeholders</h3>
+                <p>One click and each detail is swapped for a token like <code class="tok">[[SP_EMAIL_1]]</code>. The AI gets the shape of your request, never the real values. Clicking twice won't double-mask.</p>
+              </div>
+              <div class="step__visual">
+                <div class="mock">
+                  <span class="fakebtn fakebtn--green fakebtn--float">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Secured!
+                  </span>
+                  <div class="mock-input">Write a follow-up email to <code class="tok">[[SP_NAME_1]]</code> (<code class="tok">[[SP_EMAIL_1]]</code>, <code class="tok">[[SP_PHONE_1]]</code>) about invoice #4471 for client ID <code class="tok">[[SP_ID_1]]</code>.</div>
+                </div>
+              </div>
+            </li>
+
+            <li class="step">
+              <div class="step__copy">
+                <span class="step__num">3</span>
+                <h3>Mask anything, just highlight it</h3>
+                <p>A nickname, a case name, a project codename. Select it and click <b>Mask as PII</b>. Every match in that prompt is replaced, including things auto-detect wouldn't know about.</p>
+              </div>
+              <div class="step__visual">
+                <div class="mock">
+                  <div class="mock-input mock-input--select">
+                    <span class="mask-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>Mask as PII</span>
+                    Summarize the <span class="selected">Rosenberg</span> case notes and draft next steps for the <span class="selected selected--soft">Rosenberg</span> family.
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="step">
+              <div class="step__copy">
+                <span class="step__num">4</span>
+                <h3>Reveal the real details, on your screen</h3>
+                <p>When the answer arrives, click <b>Reveal Original Data</b>. Placeholders turn back into the real names and numbers right on the page, so you can read and copy a finished draft.</p>
+              </div>
+              <div class="step__visual">
+                <div class="mock">
+                  <div class="mock-reply">
+                    <span class="mock-reply__avatar" aria-hidden="true"></span>
+                    <div>
+                      <p class="mock-reply__subject">Subject: Invoice #4471, quick follow-up</p>
+                      <p>Hi <mark class="mark--blue">Jane Cohen</mark>,</p>
+                      <p>Just following up on invoice #4471 for client <mark class="mark--blue">3049-7731</mark>. If it's easier, I can call you at <mark class="mark--blue">054-381-2297</mark> this week to wrap it up.</p>
+                    </div>
+                  </div>
+                  <span class="fakebtn fakebtn--blue fakebtn--right">Reveal Original Data</span>
+                </div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="inline-cta">
+            <a class="btn btn--primary js-install" href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">Add to Chrome, it's free</a>
+            <span>Takes about 10 seconds. Open ChatGPT and it's already working.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TRY IT ============ -->
+      <section class="section section--try" id="try">
+        <div class="wrap">
+          <div class="section__head">
+            <h2>Try it on your own words</h2>
+            <p>Type or paste anything below. This demo runs entirely on this page, exactly like the extension runs in your browser. Nothing you type is sent anywhere.</p>
+          </div>
+
+          <div class="lab">
+            <div class="lab__panel">
+              <div class="lab__panel-head">
+                <label for="labInput">You type</label>
+                <button type="button" class="lab__mask" id="labMask" disabled>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>
+                  Mask selection
+                </button>
+              </div>
+              <textarea id="labInput" rows="6" spellcheck="false">Hi, please draft a reply to Sarah Levi (sarah.levi@northwind.io, +1 415-555-0142). Her card 4111 1111 1111 1111 was charged twice for order 88213. Mention our Tel Aviv office and the Project Falcon timeline.</textarea>
+              <p class="lab__hint" id="labHint">Tip: select a word like "Falcon", then press Mask selection.</p>
+              <div class="lab__found" aria-live="polite">
+                <span class="lab__found-label">Found</span>
+                <span class="chips" id="labChips"></span>
+              </div>
+            </div>
+
+            <div class="lab__panel lab__panel--out">
+              <div class="lab__panel-head">
+                <span id="labOutLabel">What the AI receives</span>
+                <div class="seg" role="group" aria-label="Output view">
+                  <button type="button" class="seg__btn is-on" data-view="masked" aria-pressed="true">Masked</button>
+                  <button type="button" class="seg__btn" data-view="revealed" aria-pressed="false">Revealed</button>
+                </div>
+              </div>
+              <div class="lab__out" id="labOut" aria-live="polite"></div>
+              <p class="lab__note" id="labNote">The AI only ever sees tokens. The real values stay in a temporary vault in your browser tab.</p>
+            </div>
+          </div>
+          <p class="lab__disclaimer">A simplified preview of SafePrompt's detection. The extension recognizes more formats.</p>
+        </div>
+      </section>
+
+      <!-- ============ WHAT IT CATCHES ============ -->
+      <section class="section section--catch">
+        <div class="wrap catch">
+          <div>
+            <h2>What it catches</h2>
+            <p>Detection runs on every prompt, on every supported site, and works inside JSON, SQL and URLs without breaking them.</p>
+          </div>
+          <ul class="catch__list">
+            <li>Names</li>
+            <li>Email addresses</li>
+            <li>Phone numbers</li>
+            <li>ID numbers, SSNs and Israeli IDs</li>
+            <li>Credit card numbers</li>
+            <li>IBANs and bank details</li>
+            <li>Home addresses</li>
+            <li>IP addresses</li>
+            <li class="catch__custom">Anything you highlight</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ PRIVACY ============ -->
+      <section class="section section--dark" id="privacy">
+        <div class="wrap">
+          <div class="section__head">
+            <h2>Runs 100% in your browser</h2>
+            <p>SafePrompt protects your data from the AI provider, and it never sends it to us either.</p>
+          </div>
+
+          <div class="flow" role="img" aria-label="Diagram: your browser detects, masks and reveals data. The AI provider only receives placeholders. SafePrompt's servers receive nothing.">
+            <div class="flow__node flow__node--you">
+              <img src="/safeprompt_website/mark.svg" alt="" width="40" height="40" />
+              <h3>Your browser</h3>
+              <p>Detects, masks and reveals. Real values sit in a per-tab vault on your device.</p>
+              <code class="flow__val">jane@acme.com</code>
+            </div>
+            <div class="flow__arrow" aria-hidden="true"><span>placeholders only</span></div>
+            <div class="flow__node">
+              <h3>The AI you use</h3>
+              <p>ChatGPT, Claude, Gemini and others get the masked prompt.</p>
+              <code class="flow__val flow__val--tok">[[SP_EMAIL_1]]</code>
+            </div>
+            <div class="flow__node flow__node--us">
+              <h3>SafePrompt servers</h3>
+              <p>Receive nothing. No prompts, no answers, no identity, no browsing analytics.</p>
+              <span class="flow__val flow__val--none">Nothing</span>
+            </div>
+          </div>
+
+          <ul class="facts">
+            <li><strong>Local detection.</strong> Finding and replacing data happens inside the extension. Your prompt text isn't sent to SafePrompt.</li>
+            <li><strong>A vault that expires.</strong> The token map lives in Chrome's session storage for that tab. It expires after about 30 minutes, and clears when you close the browser or click Clear Session History.</li>
+            <li><strong>Reveal stays on your screen.</strong> Swapping tokens back into the answer happens on the page you're looking at. It never leaves your machine.</li>
+            <li><strong>Only two optional connections.</strong> A license check with Lemon Squeezy if you buy Pro, and a Google Form if you choose to report an issue.</li>
+          </ul>
+          <p class="privacy-link"><a href="/safeprompt_website/privacy.html">Read the full privacy policy</a></p>
+        </div>
+      </section>
+
+      <!-- ============ WHO ============ -->
+      <section class="section">
+        <div class="wrap">
+          <div class="section__head">
+            <h2>Made for anyone who pastes real life into AI</h2>
+          </div>
+          <div class="who">
+            <div class="who__item"><h3>Everyday use</h3><p>Emails, forms, letters and messages that mention you, your family or your friends.</p></div>
+            <div class="who__item"><h3>Legal and HR</h3><p>Contracts, case notes, payroll lines and hiring plans, without the names attached.</p></div>
+            <div class="who__item"><h3>Finance and accounting</h3><p>Client IDs, IBANs, card numbers and invoices, kept out of the model.</p></div>
+            <div class="who__item"><h3>Support and sales</h3><p>Customer emails and phone numbers stay yours while the AI drafts the reply.</p></div>
+            <div class="who__item"><h3>Developers</h3><p>Emails and IPs inside logs, JSON and SQL get masked without breaking the syntax.</p></div>
+            <div class="who__item"><h3>Healthcare and care work</h3><p>Summarize notes without handing over who they're about.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PRICING ============ -->
+      <section class="section section--tint" id="pricing">
+        <div class="wrap">
+          <div class="section__head section__head--center">
+            <h2>Start free. Upgrade when it's part of your day.</h2>
+            <p>Warnings and detection are always free. Secure Send and Reveal come with 10 free uses, then Pro is $7.99 a month.</p>
+          </div>
+          <div class="plans">
+            <div class="plan">
+              <h3>Free</h3>
+              <p class="plan__price"><span>$0</span></p>
+              <p class="plan__sub">For trying it on real prompts</p>
+              <ul class="plan__list">
+                <li>Warnings before you send, always on</li>
+                <li>Detection on every supported AI site</li>
+                <li>Mask as PII for anything you highlight</li>
+                <li>10 Secure Sends, Reveal included</li>
+              </ul>
+              <a class="btn btn--primary btn--block js-install" href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">Add to Chrome</a>
+            </div>
+            <div class="plan plan--pro">
+              <h3>Pro</h3>
+              <p class="plan__price"><span>$7.99</span> per month</p>
+              <p class="plan__sub">For people who use AI every day</p>
+              <ul class="plan__list">
+                <li>Everything in Free</li>
+                <li>Unlimited Secure Sends</li>
+                <li>Unlimited Reveal Original Data</li>
+                <li>Activate with a license key in the extension</li>
+              </ul>
+              <a class="btn btn--dark btn--block" href="https://safeprompts.lemonsqueezy.com/checkout/buy/5a628d1d-56f6-49cb-b6d2-0f4b56a0ef6b" target="_blank" rel="noopener">Upgrade to Pro</a>
+            </div>
+          </div>
+          <p class="plans__team">Rolling SafePrompt out to a team? <a href="mailto:safeprompt1@gmail.com?subject=SafePrompt%20for%20my%20team">Email us</a> and we'll set you up.</p>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="section" id="faq">
+        <div class="wrap faq">
+          <h2>Questions</h2>
+          <div class="faq__list">
+            <details>
+              <summary>Can SafePrompt see my prompts?</summary>
+              <p>No. Detection and masking run inside the extension in your browser. Your prompts and the AI's answers aren't sent to SafePrompt, and nothing is stored on a server.</p>
+            </details>
+            <details>
+              <summary>Isn't it enough to just be careful?</summary>
+              <p>Most leaks aren't decisions, they're habits: pasting a whole email thread, a contract or a log file without reading every line. SafePrompt checks at the moment that matters, when you press Send, and only interrupts when it finds something.</p>
+            </details>
+            <details>
+              <summary>Will the AI still understand what I'm asking?</summary>
+              <p>Yes. Placeholders keep the structure of your request, and SafePrompt adds a short line asking the model to keep the tokens unchanged. When the answer comes back, Reveal Original Data puts the real values in place.</p>
+            </details>
+            <details>
+              <summary>Which AI sites does it work on?</summary>
+              <p>ChatGPT, Claude, Gemini, Grok, Microsoft Copilot and DeepSeek, in Chrome.</p>
+            </details>
+            <details>
+              <summary>Can I send something without masking it?</summary>
+              <p>Yes. Choose Send anyway in the warning. It applies to that one prompt, and you'll be warned again next time. You can also pause protection from the extension popup.</p>
+            </details>
+            <details>
+              <summary>What happens when I refresh or close the tab?</summary>
+              <p>The token map is kept per tab for about 30 minutes so Reveal still works after a refresh. Closing the browser, or clicking Clear Session History, wipes it.</p>
+            </details>
+            <details>
+              <summary>What's included for free?</summary>
+              <p>Warnings, detection and Mask as PII are always free. You also get 10 Secure Sends, with Reveal included. After that, Pro unlocks unlimited use for $7.99 a month.</p>
+            </details>
+            <details>
+              <summary>Something wasn't detected, or was flagged by mistake. What do I do?</summary>
+              <p>Highlight anything that was missed and click Mask as PII. To help us improve detection, use Report an issue in the extension or email <a href="mailto:safeprompt1@gmail.com">safeprompt1@gmail.com</a>.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FINAL CTA ============ -->
+      <section class="final">
+        <div class="wrap final__inner">
+          <img src="/safeprompt_website/mark.svg" alt="" width="72" height="72" />
+          <h2>Use AI. Keep your secrets.</h2>
+          <p>Install SafePrompt and your next prompt is already protected.</p>
+          <a class="btn btn--primary btn--lg js-install" href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">
+            <svg class="ico ico--chrome" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="3.6"/><path d="M12 8.4h8.6M8.9 13.8 4.6 6.3M15.1 13.8l-4.3 7.6"/></svg>
+            Free on the Chrome Web Store
+          </a>
+          <p class="final__works">Works with ChatGPT, Claude, Gemini, Grok, Copilot and DeepSeek</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <a class="brand brand--small" href="#top">
+          <img src="/safeprompt_website/mark.svg" alt="" width="24" height="24" />
+          <span>SafePrompt</span>
+        </a>
+        <nav class="footer__links" aria-label="Footer">
+          <a href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">Chrome Web Store</a>
+          <a href="/safeprompt_website/privacy.html">Privacy policy</a>
+          <a href="mailto:safeprompt1@gmail.com">safeprompt1@gmail.com</a>
+        </nav>
+        <p class="footer__copy">© <span id="year">2026</span> SafePrompt</p>
+      </div>
+    </footer>
+
+
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
