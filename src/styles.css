@@ -483,3 +483,11 @@ mark.mark--blue { background: var(--blue-soft); box-shadow: inset 0 -2px 0 #8fb0
 .plan__price span { font: 800 44px/1 var(--f-display); color: var(--ink); letter-spacing: -0.03em; margin-right: 4px; }
 .plans__team { text-align: center; margin-top: 28px; color: var(--muted); }
 .plans__team a { color: var(--emerald-deep); font-weight: 600; }
+
+/* Hero H1 carries the slogan plus a keyword line (SEO) */
+.hero__slogan { display: block; }
+.hero__h1sub {
+  display: block; margin-top: 18px; max-width: 24em;
+  font: 600 clamp(19px, 1.9vw, 24px)/1.3 var(--f-body); letter-spacing: -0.01em;
+  color: rgba(255,255,255,.9);
+}
