@@ -79,7 +79,7 @@
             </div>
             <ul class="trust">
               <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 9.5 4-1.2 7-5 7-9.5V6z"/></svg>Runs only in your browser</li>
-              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.2-3.6 3.8-5.5 7-5.5s5.8 1.9 7 5.5M4 4l16 16"/></svg>No account, no tracking</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.2-3.6 3.8-5.5 7-5.5s5.8 1.9 7 5.5M4 4l16 16"/></svg>No account, prompts never collected</li>
               <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Free to start</li>
             </ul>
           </div>
@@ -495,12 +495,22 @@
           <a href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">Chrome Web Store</a>
           <a href="/safeprompt_website/privacy.html">Privacy policy</a>
           <a href="mailto:safeprompt1@gmail.com">safeprompt1@gmail.com</a>
+          <button type="button" class="footer__btn" id="cookieSettings">Cookie settings</button>
         </nav>
         <p class="footer__copy">© <span id="year">2026</span> SafePrompt</p>
       </div>
     </footer>
 
 
+    <div class="consent" id="consent" role="region" aria-label="Analytics consent" hidden>
+      <p>Can we use Google Analytics cookies to see how visitors use this site? <a href="/safeprompt_website/privacy.html#website">Details</a></p>
+      <div class="consent__actions">
+        <button type="button" class="consent__btn consent__btn--ghost" data-consent="decline">Decline</button>
+        <button type="button" class="consent__btn" data-consent="accept">Accept</button>
+      </div>
+    </div>
+
     <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/analytics.js"></script>
   </body>
 </html>
