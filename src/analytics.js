@@ -87,17 +87,9 @@ document.addEventListener('click', (e) => {
     track('begin_checkout', { currency: 'USD', value: 6.99, items: [{ item_name: 'SafePrompt Pro' }] });
   } else if (a.id === 'tourPlay' || href === '#watch') {
     track('video_start', { video_title: 'SafePrompt overview' });
-  } else if (a.id === 'labMask') {
-    track('demo_mask_selection');
-  } else if (a.matches('.seg__btn')) {
-    track('demo_toggle_view', { view: a.dataset.view });
   } else if (a.tagName === 'SUMMARY' && !a.parentElement.open) {
     track('faq_open', { question: a.textContent.trim().slice(0, 100) });
   } else if (href.startsWith('mailto:')) {
     track('contact_click', { cta_location: ctaLocation(a) });
   }
 });
-
-// First time someone types in the live demo
-const lab = document.getElementById('labInput');
-lab?.addEventListener('input', () => track('demo_edit'), { once: true });

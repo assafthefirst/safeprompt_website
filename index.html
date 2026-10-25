@@ -40,7 +40,6 @@
         </a>
         <nav class="nav__links" aria-label="Main">
           <a href="#how">How it works</a>
-          <a href="#try">Try it</a>
           <a href="#privacy">Privacy</a>
           <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
@@ -259,47 +258,6 @@
             <a class="btn btn--primary js-install" href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">Add to Chrome, it's free</a>
             <span>Takes about 10 seconds. Open ChatGPT and it's already working.</span>
           </div>
-        </div>
-      </section>
-
-      <!-- ============ TRY IT ============ -->
-      <section class="section section--try" id="try">
-        <div class="wrap">
-          <div class="section__head">
-            <h2>Try it: anonymize a prompt right here</h2>
-            <p>Type or paste anything below. This demo runs entirely on this page, exactly like the extension runs in your browser. Nothing you type is sent anywhere.</p>
-          </div>
-
-          <div class="lab">
-            <div class="lab__panel">
-              <div class="lab__panel-head">
-                <label for="labInput">You type</label>
-                <button type="button" class="lab__mask" id="labMask" disabled>
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>
-                  Mask selection
-                </button>
-              </div>
-              <textarea id="labInput" rows="6" spellcheck="false">Hi, please draft a reply to Sarah Levi (sarah.levi@northwind.io, +1 415-555-0142). Her card 4111 1111 1111 1111 was charged twice for order 88213. Mention our Tel Aviv office and the Project Falcon timeline.</textarea>
-              <p class="lab__hint" id="labHint">Tip: select a word like "Falcon", then press Mask selection.</p>
-              <div class="lab__found" aria-live="polite">
-                <span class="lab__found-label">Found</span>
-                <span class="chips" id="labChips"></span>
-              </div>
-            </div>
-
-            <div class="lab__panel lab__panel--out">
-              <div class="lab__panel-head">
-                <span id="labOutLabel">What the AI receives</span>
-                <div class="seg" role="group" aria-label="Output view">
-                  <button type="button" class="seg__btn is-on" data-view="masked" aria-pressed="true">Masked</button>
-                  <button type="button" class="seg__btn" data-view="revealed" aria-pressed="false">Revealed</button>
-                </div>
-              </div>
-              <div class="lab__out" id="labOut" aria-live="polite"></div>
-              <p class="lab__note" id="labNote">The AI only ever sees tokens. The real values stay in a temporary vault in your browser tab.</p>
-            </div>
-          </div>
-          <p class="lab__disclaimer">A simplified preview of SafePrompt's detection. The extension recognizes more formats.</p>
         </div>
       </section>
 

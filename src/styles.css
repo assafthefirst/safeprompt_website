@@ -518,3 +518,7 @@ mark.mark--blue { background: var(--blue-soft); box-shadow: inset 0 -2px 0 #8fb0
   .consent { left: 8px; right: 8px; bottom: 8px; padding: 10px 12px; gap: 10px; font-size: 13px; border-radius: 12px; }
   .consent__btn { padding: 9px 13px; font-size: 13px; }
 }
+
+/* "Try it" demo removed: close the gap between How it works and What it catches */
+#how { padding-bottom: clamp(56px, 7vw, 88px); }
+.section--catch { padding-top: 0; }
