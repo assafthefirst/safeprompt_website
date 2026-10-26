@@ -2,13 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://assafthefirst.github.io/safeprompt_website/</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://assafthefirst.github.io/safeprompt_website/guides/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://assafthefirst.github.io/safeprompt_website/guides/is-it-safe-to-share-personal-information-with-chatgpt/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://assafthefirst.github.io/safeprompt_website/guides/how-to-anonymize-data-before-using-chatgpt/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://assafthefirst.github.io/safeprompt_website/guides/chatgpt-claude-gemini-privacy-settings/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://assafthefirst.github.io/safeprompt_website/guides/what-not-to-share-with-ai-chatbots/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://assafthefirst.github.io/safeprompt_website/guides/using-ai-at-work-without-leaking-client-data/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://assafthefirst.github.io/safeprompt_website/privacy.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

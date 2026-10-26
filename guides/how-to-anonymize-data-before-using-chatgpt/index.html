@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to Anonymize Data Before Using ChatGPT, Claude or Gemini | SafePrompt</title>
+    <meta name="description" content="A practical method for removing names, emails, phone numbers and IDs from a prompt before you send it to an AI chatbot, keeping the answer useful, and putting the real details back afterwards." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#0A1628" />
+    <link rel="canonical" href="https://assafthefirst.github.io/safeprompt_website/guides/how-to-anonymize-data-before-using-chatgpt/" />
+    <link rel="icon" type="image/svg+xml" href="/safeprompt_website/mark.svg" />
+    <link rel="alternate icon" type="image/png" href="/safeprompt_website/logo.png" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="SafePrompt" />
+    <meta property="og:title" content="How to Anonymize Data Before Using ChatGPT, Claude or Gemini | SafePrompt" />
+    <meta property="og:description" content="A practical method for removing names, emails, phone numbers and IDs from a prompt before you send it to an AI chatbot, keeping the answer useful, and putting the real details back afterwards." />
+    <meta property="og:url" content="https://assafthefirst.github.io/safeprompt_website/guides/how-to-anonymize-data-before-using-chatgpt/" />
+    <meta property="og:image" content="https://assafthefirst.github.io/safeprompt_website/media/poster.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to anonymize data before using ChatGPT, Claude or Gemini", "description": "A practical method for removing names, emails, phone numbers and IDs from a prompt before you send it to an AI chatbot, keeping the answer useful, and putting the real details back afterwards.", "datePublished": "2026-10-26", "dateModified": "2026-10-26", "author": {"@type": "Organization", "name": "SafePrompt", "url": "https://assafthefirst.github.io/safeprompt_website/"}, "publisher": {"@type": "Organization", "name": "SafePrompt", "logo": {"@type": "ImageObject", "url": "https://assafthefirst.github.io/safeprompt_website/logo.png"}}, "image": "https://assafthefirst.github.io/safeprompt_website/media/poster.jpg", "mainEntityOfPage": "https://assafthefirst.github.io/safeprompt_website/guides/how-to-anonymize-data-before-using-chatgpt/"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SafePrompt", "item": "https://assafthefirst.github.io/safeprompt_website/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://assafthefirst.github.io/safeprompt_website/guides/"}, {"@type": "ListItem", "position": 3, "name": "How to anonymize data before using ChatGPT, Claude or Gemini", "item": "https://assafthefirst.github.io/safeprompt_website/guides/how-to-anonymize-data-before-using-chatgpt/"}]}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/safeprompt_website/src/styles.css" />
+  </head>
+  <body class="page-guide">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav nav--solid" id="top">
+      <div class="wrap nav__inner">
+        <a class="brand" href="/safeprompt_website/" aria-label="SafePrompt home">
+          <img src="/safeprompt_website/mark.svg" alt="" width="32" height="32" />
+          <span>SafePrompt</span>
+        </a>
+        <nav class="nav__links" aria-label="Main">
+          <a href="/safeprompt_website/#how">How it works</a>
+          <a href="/safeprompt_website/#privacy">Privacy</a>
+          <a href="/safeprompt_website/#pricing">Pricing</a>
+          <a href="/safeprompt_website/guides/">Guides</a>
+          <a href="/safeprompt_website/#faq">FAQ</a>
+        </nav>
+        <a class="btn btn--primary btn--sm js-install" href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          Add to Chrome
+        </a>
+      </div>
+    </header>
+
+    <main id="main" class="guide">
+      <div class="wrap guide__wrap">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="/safeprompt_website/">SafePrompt</a><span aria-hidden="true">/</span><a href="/safeprompt_website/guides/">Guides</a>
+        </nav>
+        <article class="article">
+          <header class="article__head">
+            <h1>How to anonymize data before using ChatGPT, Claude or Gemini</h1>
+            <p class="article__meta">Updated <time datetime="2026-10-26">October 26, 2026</time>, 6-minute read</p>
+          </header>
+          <div class="prose">
+<p>Anonymizing a prompt means replacing the details that identify real people with neutral placeholders before you send it. The AI still understands the task, because it needs the <em>shape</em> of your request, not the actual names and numbers. Done well, you get an answer that's just as useful, and the real data never leaves your computer.</p>
+<h2>Why not just turn off training?</h2>
+<p>Turning off training in <a href="/safeprompt_website/guides/chatgpt-claude-gemini-privacy-settings/">ChatGPT, Claude and Gemini's settings</a> is worth doing, but it only controls what the company does with your data after it arrives. Your prompt is still sent, stored with your account, and in some cases kept for safety review. Anonymizing works one step earlier: the sensitive details are never sent at all.</p>
+<h2>The manual method in 4 steps</h2>
+<h3>1. Find the identifiers</h3>
+<p>Before pasting, scan the text for anything that points to a real person or account:</p>
+<ul>
+<li>Names (including in email signatures and greetings)</li>
+<li>Email addresses, phone numbers, street addresses</li>
+<li>ID numbers, account numbers, card numbers, IBANs</li>
+<li>Company names, case or project names that could identify a client</li>
+<li>Dates of birth and other dates tied to a person</li>
+</ul>
+<h3>2. Replace each one with a consistent placeholder</h3>
+<p>Use a clear label and a number, and use the <strong>same</strong> placeholder every time the same value appears:</p>
+<blockquote>
+<p><strong>Before:</strong> Write a follow-up email to Jane Cohen (jane.cohen@acme.com, 054-381-2297) about invoice #4471 for client ID 3049-7731. Jane prefers calls on Tuesdays.</p>
+<p><strong>After:</strong> Write a follow-up email to [NAME_1] ([EMAIL_1], [PHONE_1]) about invoice #4471 for client ID [ID_1]. [NAME_1] prefers calls on Tuesdays.</p>
+</blockquote>
+<p>Consistency matters. If "Jane" becomes [NAME_1] in one place and [PERSON] in another, the AI will think they're two different people.</p>
+<h3>3. Keep the key on your side</h3>
+<p>Write down which placeholder stands for which value, in a note that stays on your computer. Never paste the key into the same chat.</p>
+<h3>4. Swap the real details back</h3>
+<p>When the answer arrives, replace each placeholder with the real value before you use the text. With a long answer, use your editor's find-and-replace so you don't miss one.</p>
+<h2>Mistakes that undo the work</h2>
+<ul>
+<li><strong>Indirect identifiers.</strong> "The CFO of a 40-person law firm in Haifa" can identify someone without a single name. Generalize details that aren't needed: "a senior manager at a small firm".</li>
+<li><strong>Files and screenshots.</strong> Uploading the original PDF or a screenshot sends everything in it, even if you anonymized the text you typed.</li>
+<li><strong>Forgotten repeats.</strong> Names often appear again in signatures, quoted replies and footers at the bottom of a thread.</li>
+<li><strong>Pasting the key.</strong> It's surprisingly easy to paste your note with the real values into the chat by mistake.</li>
+</ul>
+<h2>Is this "anonymization" in the legal sense?</h2>
+<p>Strictly speaking, replacing details with placeholders while keeping a key is <em>pseudonymization</em>: the data can be re-identified by whoever holds the key. That's the point here, because the key stays with you and the AI company only receives the placeholders. If you work under privacy rules such as GDPR or professional confidentiality, check your organization's policy for what is allowed in AI tools at all (<a href="/safeprompt_website/guides/using-ai-at-work-without-leaking-client-data/">guide for work use</a>).</p>
+<h2>The automatic way: SafePrompt</h2>
+<p>The manual method works, but on a busy day it's the step people skip. <a href="/safeprompt_website/">SafePrompt</a> does the same four steps automatically on ChatGPT, Claude, Gemini, Grok, Copilot and DeepSeek:</p>
+<ol>
+<li><strong>Find:</strong> when you press Send, it lists the personal data it found (names, emails, phone numbers, IDs, cards and more).</li>
+<li><strong>Replace:</strong> one click on <em>Secure &amp; send</em> swaps each detail for a consistent placeholder like <code>[[SP_EMAIL_1]]</code>. You can also highlight any word, such as a case name, and click <em>Mask as PII</em>.</li>
+<li><strong>Keep the key:</strong> the mapping is stored only in your browser tab, and expires after about 30 minutes.</li>
+<li><strong>Swap back:</strong> <em>Reveal Original Data</em> puts the real values back into the AI's answer, on your screen only.</li>
+</ol>
+<p>Nothing is sent to SafePrompt. It's free to install, with 10 free Secure Sends included.</p>
+
+          <aside class="guide-cta" aria-label="SafePrompt">
+            <img src="/safeprompt_website/mark.svg" alt="" width="44" height="44" />
+            <div>
+              <p class="guide-cta__title">Mask personal data automatically before you hit Send</p>
+              <p>SafePrompt is a free Chrome extension for ChatGPT, Claude, Gemini, Grok, Copilot and DeepSeek. It swaps names, emails, numbers and IDs for placeholders, and puts them back in the answer. Everything runs in your browser.</p>
+              <a class="btn btn--primary js-install" href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener"><svg class="ico ico--chrome" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="3.6"/><path d="M12 8.4h8.6M8.9 13.8 4.6 6.3M15.1 13.8l-4.3 7.6"/></svg> Add to Chrome, it's free</a>
+            </div>
+          </aside>
+<h2>Quick checklist before you press Send</h2>
+<ul>
+<li class="check">Names, emails, phones and addresses replaced</li>
+<li class="check">ID, account and card numbers replaced</li>
+<li class="check">Indirect details generalized (employer, city, job title)</li>
+<li class="check">No original files or screenshots attached</li>
+<li class="check">Your placeholder key kept outside the chat</li>
+</ul>
+<h2 class="sources-title">Sources</h2>
+<ul class="sources">
+<li><a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance" target="_blank" rel="noopener">OpenAI: How your data is used to improve model performance</a></li>
+<li><a href="https://support.google.com/gemini/answer/13594961?hl=en" target="_blank" rel="noopener">Google: Gemini Apps Privacy Hub</a></li>
+</ul>
+          </div>
+        </article>
+        <section class="related" aria-labelledby="related-title">
+          <h2 id="related-title">Related guides</h2>
+          <ul class="related__list"><li><a href="/safeprompt_website/guides/is-it-safe-to-share-personal-information-with-chatgpt/"><span class="related__title">Is it safe to share personal information with ChatGPT?</span><span class="related__desc">What happens to what you type, the real risks, and how to get AI help without handing over personal data.</span></a></li><li><a href="/safeprompt_website/guides/what-not-to-share-with-ai-chatbots/"><span class="related__title">What not to share with ChatGPT and other AI chatbots</span><span class="related__desc">A practical checklist of what never to paste, and how to still get the help you need.</span></a></li><li><a href="/safeprompt_website/guides/using-ai-at-work-without-leaking-client-data/"><span class="related__title">Using ChatGPT at work without leaking client data</span><span class="related__desc">How legal, HR, finance, healthcare and support teams can use AI without exposing other people&#x27;s data.</span></a></li></ul>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <a class="brand brand--small" href="/safeprompt_website/">
+          <img src="/safeprompt_website/mark.svg" alt="" width="24" height="24" />
+          <span>SafePrompt</span>
+        </a>
+        <nav class="footer__links" aria-label="Footer">
+          <a href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">Chrome Web Store</a>
+          <a href="/safeprompt_website/guides/">Guides</a>
+          <a href="/safeprompt_website/privacy.html">Privacy policy</a>
+          <a href="mailto:safeprompt1@gmail.com">safeprompt1@gmail.com</a>
+          <button type="button" class="footer__btn" id="cookieSettings">Cookie settings</button>
+        </nav>
+        <p class="footer__copy">© 2026 SafePrompt</p>
+      </div>
+    </footer>
+
+    <div class="consent" id="consent" role="region" aria-label="Analytics consent" hidden>
+      <p>Can we use Google Analytics cookies to see how visitors use this site? <a href="/safeprompt_website/privacy.html#website">Details</a></p>
+      <div class="consent__actions">
+        <button type="button" class="consent__btn consent__btn--ghost" data-consent="decline">Decline</button>
+        <button type="button" class="consent__btn" data-consent="accept">Accept</button>
+      </div>
+    </div>
+
+    <script type="module" src="/safeprompt_website/src/analytics.js"></script>
+  </body>
+</html>

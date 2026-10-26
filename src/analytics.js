@@ -67,12 +67,13 @@ banner?.querySelector('[data-consent="decline"]')?.addEventListener('click', () 
 
 // ---- events ----
 function ctaLocation(el) {
-  if (el.closest('.nav')) return 'nav';
+  if (el.closest('.nav')) return document.body.classList.contains('page-guide') ? 'guide_nav' : 'nav';
   if (el.closest('.hero')) return 'hero';
   if (el.closest('#how')) return 'how_it_works';
   if (el.closest('#pricing')) return 'pricing';
   if (el.closest('.final')) return 'final_cta';
   if (el.closest('.footer')) return 'footer';
+  if (el.closest('.guide-cta')) return location.pathname.includes('/guides/') && !location.pathname.endsWith('/guides/') ? 'guide' : 'guides_index';
   return 'other';
 }
 
