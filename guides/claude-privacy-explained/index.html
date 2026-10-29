@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Claude Privacy Explained: Training, Data Retention and Settings | SafePrompt</title>
+    <meta name="description" content="How Anthropic uses your Claude conversations, how long chats are kept with training on or off, what incognito chats do, and the settings to check on Free, Pro and Max plans." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#0A1628" />
+    <link rel="canonical" href="https://usesafeprompt.com/guides/claude-privacy-explained/" />
+    <link rel="icon" type="image/svg+xml" href="/mark.svg" />
+    <link rel="alternate icon" type="image/png" href="/logo.png" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="SafePrompt" />
+    <meta property="og:title" content="Claude Privacy Explained: Training, Data Retention and Settings | SafePrompt" />
+    <meta property="og:description" content="How Anthropic uses your Claude conversations, how long chats are kept with training on or off, what incognito chats do, and the settings to check on Free, Pro and Max plans." />
+    <meta property="og:url" content="https://usesafeprompt.com/guides/claude-privacy-explained/" />
+    <meta property="og:image" content="https://usesafeprompt.com/media/poster.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude privacy explained", "description": "How Anthropic uses your Claude conversations, how long chats are kept with training on or off, what incognito chats do, and the settings to check on Free, Pro and Max plans.", "datePublished": "2026-10-29", "dateModified": "2026-10-29", "author": {"@type": "Organization", "name": "SafePrompt", "url": "https://usesafeprompt.com/"}, "publisher": {"@type": "Organization", "name": "SafePrompt", "logo": {"@type": "ImageObject", "url": "https://usesafeprompt.com/logo.png"}}, "image": "https://usesafeprompt.com/media/poster.jpg", "mainEntityOfPage": "https://usesafeprompt.com/guides/claude-privacy-explained/"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SafePrompt", "item": "https://usesafeprompt.com/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://usesafeprompt.com/guides/"}, {"@type": "ListItem", "position": 3, "name": "Claude privacy explained", "item": "https://usesafeprompt.com/guides/claude-privacy-explained/"}]}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body class="page-guide">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav nav--solid" id="top">
+      <div class="wrap nav__inner">
+        <a class="brand" href="/" aria-label="SafePrompt home">
+          <img src="/mark.svg" alt="" width="32" height="32" />
+          <span>SafePrompt</span>
+        </a>
+        <nav class="nav__links" aria-label="Main">
+          <a href="/#how">How it works</a>
+          <a href="/#privacy">Privacy</a>
+          <a href="/#pricing">Pricing</a>
+          <a href="/guides/">Guides</a>
+          <a href="/#faq">FAQ</a>
+        </nav>
+        <a class="btn btn--primary btn--sm js-install" href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          Add to Chrome
+        </a>
+      </div>
+    </header>
+
+    <main id="main" class="guide">
+      <div class="wrap guide__wrap">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="/">SafePrompt</a><span aria-hidden="true">/</span><a href="/guides/">Guides</a>
+        </nav>
+        <article class="article">
+          <header class="article__head">
+            <h1>Claude privacy explained</h1>
+            <p class="article__meta">Updated <time datetime="2026-10-29">October 29, 2026</time>, 6-minute read</p>
+          </header>
+          <div class="prose">
+<p>Claude has a reputation as a privacy-conscious AI, and Anthropic publishes clear rules about what it keeps. But those rules changed in late 2025, and the default is no longer "your chats are never used for training". Here's what applies today to the consumer plans (Free, Pro and Max), and what to change.</p>
+<h2>The main setting: Help improve Claude</h2>
+<p>Since late 2025, Anthropic can use chats and coding sessions from consumer accounts to train its models, if the <strong>Help improve Claude</strong> setting is on.</p>
+<p><strong>To check or change it:</strong></p>
+<ol>
+<li>Click your name, then <strong>Settings</strong>.</li>
+<li>Open <strong>Privacy</strong>.</li>
+<li>Turn <strong>Help improve Claude</strong> off if you don't want your chats used for training.</li>
+</ol>
+<p><strong>What the setting does:</strong></p>
+<ul>
+<li><strong>On:</strong> new and resumed chats can be used for training, and Anthropic may keep them, de-identified, for <strong>up to five years</strong> in its training pipeline.</li>
+<li><strong>Off:</strong> your previous and new chats won't be used to train future models. Data already used in training runs that were in progress, or in models already trained, can't be removed from them.</li>
+</ul>
+<p>Business, government and education accounts and the API are covered by separate terms and aren't affected by this setting.</p>
+<h2>How long Claude keeps your chats</h2>
+<p>According to Anthropic's privacy center:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>How long it's kept</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chat you delete</td>
+<td>Removed from your history immediately, deleted from back-end systems within <strong>30 days</strong></td>
+</tr>
+<tr>
+<td>Training on (Help improve Claude)</td>
+<td>De-identified copies up to <strong>5 years</strong> in the training pipeline</td>
+</tr>
+<tr>
+<td>Feedback you give (thumbs up/down, bug reports)</td>
+<td><strong>5 years</strong></td>
+</tr>
+<tr>
+<td>Chat flagged for breaking the usage policy</td>
+<td>Inputs and outputs up to <strong>2 years</strong>; safety scores up to <strong>7 years</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Anthropic can also keep data longer when the law requires it or to resolve disputes.</p>
+<h2>Incognito chats</h2>
+<p>Claude's <strong>incognito</strong> mode is the closest thing to a private conversation. Anthropic says incognito chats are never used to improve its models, and they don't appear in your chat history.</p>
+<h2>Feedback is a hidden exception</h2>
+<p>Clicking thumbs up or down sends that conversation to Anthropic as feedback, and feedback data is kept for five years. If a chat contains anything sensitive, skip the feedback buttons.</p>
+<h2>What no setting changes</h2>
+<p>Even with training off and incognito on:</p>
+<ul>
+<li><strong>Your prompt is still sent to Anthropic</strong> and processed on its servers.</li>
+<li><strong>Deleted chats can take up to 30 days</strong> to disappear from its systems.</li>
+<li><strong>Safety review still applies</strong> if a conversation is flagged.</li>
+</ul>
+<p>So the practical rule is the same as for any AI tool: don't send what you can't take back. Replace names, numbers and client details with placeholders (<a href="/guides/how-to-anonymize-data-before-using-chatgpt/">here's how</a>), and keep the real values on your side.</p>
+<h2>Where SafePrompt fits</h2>
+<p><a href="/">SafePrompt</a> works on claude.ai in Chrome. When you press Send, it spots names, emails, phone numbers, IDs and card numbers and offers to swap them for placeholders like <code>[[SP_EMAIL_1]]</code>. When Claude answers, the real values are restored on your screen only. Detection runs entirely in your browser, so the originals reach neither Anthropic nor SafePrompt.</p>
+
+          <aside class="guide-cta" aria-label="SafePrompt">
+            <img src="/mark.svg" alt="" width="44" height="44" />
+            <div>
+              <p class="guide-cta__title">Mask personal data automatically before you hit Send</p>
+              <p>SafePrompt is a free Chrome extension for ChatGPT, Claude, Gemini, Grok, Copilot and DeepSeek. It swaps names, emails, numbers and IDs for placeholders, and puts them back in the answer. Everything runs in your browser.</p>
+              <a class="btn btn--primary js-install" href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener"><svg class="ico ico--chrome" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="3.6"/><path d="M12 8.4h8.6M8.9 13.8 4.6 6.3M15.1 13.8l-4.3 7.6"/></svg> Add to Chrome, it's free</a>
+            </div>
+          </aside>
+<h2>Quick checklist</h2>
+<ul>
+<li class="check">Help improve Claude set the way you want it (Settings, then Privacy)</li>
+<li class="check">Incognito for anything sensitive</li>
+<li class="check">No feedback clicks on conversations with personal data</li>
+<li class="check">Old chats you don't need deleted</li>
+<li class="check">No IDs, card numbers, health details or client data in prompts</li>
+</ul>
+<h2 class="sources-title">Sources</h2>
+<ul class="sources">
+<li><a href="https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data" target="_blank" rel="noopener">Anthropic Privacy Center: How long do you store my data?</a></li>
+<li><a href="https://www.tomsguide.com/ai/claude/your-claude-chats-are-being-used-to-train-ai-heres-how-to-opt-out" target="_blank" rel="noopener">Tom's Guide: Your Claude chats are being used to train AI, here's how to opt out</a></li>
+</ul>
+          </div>
+        </article>
+        <section class="related" aria-labelledby="related-title">
+          <h2 id="related-title">Related guides</h2>
+          <ul class="related__list"><li><a href="/guides/chatgpt-claude-gemini-privacy-settings/"><span class="related__title">ChatGPT, Claude and Gemini privacy settings: how to stop AI training on your chats</span><span class="related__desc">Step-by-step settings for all three, what each one protects, and what it doesn&#x27;t.</span></a></li><li><a href="/guides/gemini-privacy-explained/"><span class="related__title">Gemini privacy explained</span><span class="related__desc">What Google keeps, when people read your chats, and which settings to change.</span></a></li><li><a href="/guides/how-to-anonymize-data-before-using-chatgpt/"><span class="related__title">How to anonymize data before using ChatGPT, Claude or Gemini</span><span class="related__desc">Remove names, emails, numbers and IDs from a prompt, keep the answer useful, and put the real details back afterwards.</span></a></li></ul>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <a class="brand brand--small" href="/">
+          <img src="/mark.svg" alt="" width="24" height="24" />
+          <span>SafePrompt</span>
+        </a>
+        <nav class="footer__links" aria-label="Footer">
+          <a href="https://chromewebstore.google.com/detail/safeprompt-ai-privacy-ano/dfblkeoplcgpnfdcdnoikopfmfpkpphp" target="_blank" rel="noopener">Chrome Web Store</a>
+          <a href="/guides/">Guides</a>
+          <a href="/privacy.html">Privacy policy</a>
+          <a href="mailto:safeprompt1@gmail.com">safeprompt1@gmail.com</a>
+          <button type="button" class="footer__btn" id="cookieSettings">Cookie settings</button>
+        </nav>
+        <p class="footer__copy">© 2026 SafePrompt</p>
+      </div>
+    </footer>
+
+    <div class="consent" id="consent" role="region" aria-label="Analytics consent" hidden>
+      <p>Can we use Google Analytics cookies to see how visitors use this site? <a href="/privacy.html#website">Details</a></p>
+      <div class="consent__actions">
+        <button type="button" class="consent__btn consent__btn--ghost" data-consent="decline">Decline</button>
+        <button type="button" class="consent__btn" data-consent="accept">Accept</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/analytics.js"></script>
+  </body>
+</html>

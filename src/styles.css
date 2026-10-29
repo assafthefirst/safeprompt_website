@@ -120,7 +120,7 @@ b, strong { font-weight: 600; color: var(--ink); }
 .pill__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--emerald-bright); box-shadow: 0 0 0 4px rgba(47,211,162,.2); }
 .hero__title {
   color: var(--white);
-  font-size: clamp(50px, 7.4vw, 92px);
+  font-size: clamp(44px, 5.6vw, 72px);
   line-height: .96; font-weight: 800; letter-spacing: -0.035em;
   margin: 22px 0 22px;
 }
